@@ -25,6 +25,8 @@ public class StudentPO {
 
     private String emergencyContactName;
 
+    private String emergencyContactPhone;
+
     private String email1;
 
     private String email2;
