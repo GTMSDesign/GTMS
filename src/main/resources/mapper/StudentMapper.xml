@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.edu.gtms.dao.StudentDao">
+
+
+    <resultMap id="StudentPO" type="com.nju.edu.gtms.model.po.StudentPO">
+        <id column="student_number" property="studentNumber" />
+        <result column="student_name" property="studentName" />
+        <result column="grade" property="grade" />
+        <result column="phone" property="phone" />
+        <result column="office_phone" property="officePhone" />
+        <result column="home_phone" property="homePhone" />
+        <result column="emergency_contact_name" property="emergencyContactName" />
+        <result column="email1" property="email1" />
+        <result column="email2" property="email2" />
+        <result column="company" property="company" />
+        <result column="position" property="position" />
+        <result column="excellent_courses" property="excellentCourses" />
+        <result column="good_courses" property="goodCourses" />
+        <result column="fair_courses" property="fairCourses" />
+        <result column="pass_courses" property="passCourses" />
+        <result column="account" property="account" />
+    </resultMap>
+</mapper>
