@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class StudentPO {
 
-    private String studentNumber;
+    private String studentId;
 
     private String studentName;
-
+    //班级
     private String grade;
 
     private String phone;
@@ -42,8 +42,8 @@ public class StudentPO {
     private int fairCourses;
 
     private int pass_courses;
-
-    private String account;
+    //是否分配
+    private String distribute;
 
 
 

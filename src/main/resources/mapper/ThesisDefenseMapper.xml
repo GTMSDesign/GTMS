@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.edu.gtms.dao.ThesisDefenseDao">
+
+    <!-- 结果映射配置 -->
+    <resultMap id="ThesisDefensePO" type="com.nju.edu.gtms.model.po.ThesisDefensePO">
+        <id column="defense_id" property="defenseId" />
+        <result column="thesis_id" property="thesisId" />
+        <result column="secretary" property="secretary" />
+        <result column="teacher_1" property="teacher1" />
+        <result column="teacher_2" property="teacher2" />
+        <result column="teacher_3" property="teacher3" />
+        <result column="conclusion" property="conclusion" />
+        <result column="resolution" property="resolution" />
+        <result column="defense_remarks" property="defenseRemarks" />
+        <result column="defense_url" property="defenseUrl" />
+        <result column="resolution_url" property="resolutionUrl" />
+        <result column="place" property="place" />
+        <result column="date" property="date" javaType="java.util.Date" />
+        <result column="review" property="review" />
+    </resultMap>
+
+</mapper>

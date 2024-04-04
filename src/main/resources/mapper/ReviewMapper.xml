@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.edu.gtms.dao.ReviewDao">
+
+    <!-- 结果映射配置 -->
+    <resultMap id="ReviewPO" type="com.nju.edu.gtms.model.po.ReviewPO">
+        <id column="review_id" property="reviewId" />
+        <result column="thesis_id" property="thesisId" />
+        <result column="internal_teacher_id" property="internalTeacherId" />
+        <result column="internal_teacher_opinion_student" property="internalTeacherOpinionStudent" />
+        <result column="internal_teacher_opinion_teacher" property="internalTeacherOpinionTeacher" />
+        <result column="internal_teacher_status" property="internalTeacherStatus" />
+        <result column="external_teacher_id" property="externalTeacherId" />
+        <result column="external_teacher_opinion_student" property="externalTeacherOpinionStudent" />
+        <result column="external_teacher_opinion_teacher" property="externalTeacherOpinionTeacher" />
+        <result column="external_teacher_status" property="externalTeacherStatus" />
+        <result column="date" property="date" javaType="java.util.Date" />
+    </resultMap>
+
+</mapper>

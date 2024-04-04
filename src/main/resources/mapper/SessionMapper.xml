@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.edu.gtms.dao.SessionDao">
+
+
+
+    <!-- 结果映射配置 -->
+    <resultMap id="SessionPO" type="com.nju.edu.gtms.model.po.SessionPO">
+        <id column="session_id" property="sessionId" />
+        <result column="teacher_id" property="teacherId" />
+        <result column="student_id" property="studentId" />
+        <result column="title" property="title" />
+        <result column="remarks" property="remarks" />
+        <result column="url" property="url" />
+        <result column="date" property="date"  />
+    </resultMap>
+
+</mapper>

@@ -6,7 +6,7 @@
         select * from students where student_number =#{studentNumber}
     </select>
     <resultMap id="StudentPO" type="com.nju.edu.gtms.model.po.StudentPO">
-        <id column="student_number" property="studentNumber" />
+        <id column="student_number" property="studentId" />
         <result column="student_name" property="studentName" />
         <result column="class" property="grade" />
         <result column="phone" property="phone" />
@@ -22,6 +22,6 @@
         <result column="good_courses" property="goodCourses" />
         <result column="fair_courses" property="fairCourses" />
         <result column="pass_courses" property="passCourses" />
-        <result column="account" property="account" />
+        <result column="distribute" property="distribute" />
     </resultMap>
 </mapper>
