@@ -1,5 +1,6 @@
 package com.nju.edu.gtms;
 
+import com.nju.edu.gtms.dao.AccountDao;
 import com.nju.edu.gtms.dao.StudentDao;
 import com.nju.edu.gtms.model.po.StudentPO;
 import org.junit.jupiter.api.Test;
@@ -11,9 +12,12 @@ class GtmsApplicationTests {
 
     @Autowired
     private StudentDao studentDao;
+    @Autowired
+    private AccountDao accountDao;
     @Test
     void contextLoads() {
         System.out.println(studentDao.findOneByNumber("12345678"));
+        System.out.println(accountDao.findByAccountAndPassword("201250187","11111111"));
     }
 
 }

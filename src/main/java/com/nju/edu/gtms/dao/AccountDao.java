@@ -7,4 +7,6 @@ import com.nju.edu.gtms.model.po.AccountPO;
 @Repository
 @Mapper
 public interface AccountDao {
+
+    AccountPO findByAccountAndPassword(String account,String password);
 }
