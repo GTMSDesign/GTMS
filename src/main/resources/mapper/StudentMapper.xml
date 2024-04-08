@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nju.edu.gtms.dao.StudentDao">
 
-    <select id="findOneByNumber" resultType="com.nju.edu.gtms.model.po.StudentPO">
-        select * from students where student_id =#{studentNumber}
+    <select id="findOneById" resultMap="StudentPO">
+        select * from students where student_id =#{studentId}
     </select>
     <resultMap id="StudentPO" type="com.nju.edu.gtms.model.po.StudentPO">
         <id column="student_id" property="studentId" />

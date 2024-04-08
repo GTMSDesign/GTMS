@@ -9,4 +9,6 @@ import com.nju.edu.gtms.model.po.AccountPO;
 public interface AccountDao {
 
     AccountPO findByAccountAndPassword(String account,String password);
+
+    AccountPO findByAccount(String account);
 }

@@ -2,10 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nju.edu.gtms.dao.AccountDao">
 
-    <select id="findByAccountAndPassword" resultType="com.nju.edu.gtms.model.po.AccountPO">
+    <select id="findByAccountAndPassword" resultMap="AccountPO">
         select * from accounts where account =#{account} and password =#{password}
     </select>
-
+    <select id="findByAccount" resultMap="AccountPO">
+        select * from accounts where account =#{account}
+    </select>
     <!-- 结果映射配置 -->
     <resultMap id="AccountPO" type="com.nju.edu.gtms.model.po.AccountPO">
         <id column="account" property="account" />

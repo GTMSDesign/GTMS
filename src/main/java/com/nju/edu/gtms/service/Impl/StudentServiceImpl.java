@@ -18,5 +18,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
 
-
+    @Override
+    public StudentPO getStudentById(String studentId) {
+        return studentDao.findOneById(studentId);
+    }
 }

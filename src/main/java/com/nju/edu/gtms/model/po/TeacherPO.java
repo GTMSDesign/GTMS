@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class InstructorPO {
+public class TeacherPO {
 
     private String teacherId;
 

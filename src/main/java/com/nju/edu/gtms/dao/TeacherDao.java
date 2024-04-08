@@ -1,12 +1,12 @@
 package com.nju.edu.gtms.dao;
 
 import com.nju.edu.gtms.model.po.StudentPO;
+import com.nju.edu.gtms.model.po.TeacherPO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @Mapper
-public interface StudentDao {
-    StudentPO findOneById(String studentId);
-
+public interface TeacherDao {
+    TeacherPO findOneById(String teacherId);
 }

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.nju.edu.gtms.dao.InstructorDao">
+<mapper namespace="com.nju.edu.gtms.dao.TeacherDao">
 
-
-
+    <select id="findOneById" resultMap="TeacherPO">
+        select * from teachers where teacher_id =#{teacherId}
+    </select>
     <!-- 结果映射配置 -->
-    <resultMap id="InstructorPO" type="com.nju.edu.gtms.model.po.InstructorPO">
+    <resultMap id="TeacherPO" type="com.nju.edu.gtms.model.po.TeacherPO">
         <id column="teacher_id" property="teacherId" />
         <result column="teacher_name" property="teacherName" />
         <result column="phone" property="phone" />

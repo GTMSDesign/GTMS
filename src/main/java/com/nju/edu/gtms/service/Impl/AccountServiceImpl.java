@@ -2,29 +2,40 @@ package com.nju.edu.gtms.service.Impl;
 
 import com.nju.edu.gtms.dao.AccountDao;
 import com.nju.edu.gtms.model.po.AccountPO;
+import com.nju.edu.gtms.model.po.User;
 import com.nju.edu.gtms.model.vo.AccountVO;
 import com.nju.edu.gtms.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.security.PublicKey;
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
 public class AccountServiceImpl implements AccountService {
     private AccountDao accountDao;
-
     @Autowired
     public AccountServiceImpl(AccountDao accountDao){
         this.accountDao = accountDao;
     }
 
+
     @Override
-    public Map<String, String> login(AccountVO accountVO) {
-        AccountPO accountPO = accountDao.findByAccountAndPassword(accountVO.getAccount(),accountVO.getPassword());
-        //todo:生成token返回
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        AccountPO accountPO = accountDao.findByAccount(username);
+        if(accountPO==null){
+            throw new UsernameNotFoundException("User not found with username: " + username);
+        }
+        User user = new User();
+        user.setUsername(accountPO.getAccount());
+        user.setPassword(accountPO.getPassword());
+        user.setAuthorities(AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_" + accountPO.getPower().toUpperCase()));
 
-
-        return null;
+        return user;
     }
 }

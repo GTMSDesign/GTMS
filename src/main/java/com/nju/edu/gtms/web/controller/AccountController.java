@@ -15,8 +15,13 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PostMapping("/login")
-    public Result login(@RequestBody AccountVO accountVO){
-        return Result.success(accountService.login(accountVO));
+//    @PostMapping("/login")
+//    public Result login(@RequestBody AccountVO accountVO){
+//        return Result.success(accountService.login(accountVO));
+//    }
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "login";
     }
+
 }
