@@ -11,11 +11,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AccountVO {
 
-    private String account;
+    private String username;
 
     private String password;
 
-    private String name;
 
-    private String power; // 用户权力（老师、学生、管理员、教务员）
 }

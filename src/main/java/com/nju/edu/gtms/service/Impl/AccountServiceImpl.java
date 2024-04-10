@@ -5,7 +5,13 @@ import com.nju.edu.gtms.model.po.AccountPO;
 import com.nju.edu.gtms.model.po.User;
 import com.nju.edu.gtms.model.vo.AccountVO;
 import com.nju.edu.gtms.service.AccountService;
+import com.nju.edu.gtms.util.JwtConfig;
+import org.apache.ibatis.ognl.ObjectElementsAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -38,4 +45,6 @@ public class AccountServiceImpl implements AccountService {
 
         return user;
     }
+
+
 }

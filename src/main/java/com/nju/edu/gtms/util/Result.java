@@ -9,10 +9,6 @@ import org.apache.coyote.Response;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Result {
-    public static String SUCCESS_CODE = "00000";
-    public static String FAIL_CODE = "11111";
-    public static String SUCCESS_MSG = "Success";
-    public static String FAIL_MSG = "Fail";
     private String code;
     private String msg;
     private Object result;
@@ -22,13 +18,13 @@ public class Result {
         this.msg = msg;
     }
     public static Result success(Object result){
-        return new Result(SUCCESS_CODE,SUCCESS_MSG,result);
+        return new Result( "00000","Success",result);
     }
     public static Result success(){
-        return new Result(SUCCESS_CODE,SUCCESS_MSG);
+        return new Result( "00000","Success");
     }
 
     public static Result fail(){
-        return new Result(FAIL_CODE,FAIL_MSG);
+        return new Result( "11111","请登录");
     }
 }
