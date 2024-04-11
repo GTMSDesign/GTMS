@@ -31,7 +31,7 @@ public class AccountServiceImpl implements AccountService {
         this.accountDao = accountDao;
     }
 
-
+    //此处的username实为userId
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AccountPO accountPO = accountDao.findByAccount(username);
@@ -46,5 +46,9 @@ public class AccountServiceImpl implements AccountService {
         return user;
     }
 
+    public String getUsernameByUserId(String userId){
+        AccountPO accountPO = accountDao.findByAccount(userId);
+        return accountPO.getName();
+    }
 
 }

@@ -9,6 +9,6 @@ import java.util.Map;
 
 @Service
 public interface AccountService extends UserDetailsService {
-
+    String getUsernameByUserId(String userId);
 
 }
