@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nju.edu.gtms.dao.ThesisDao">
 
+    <select id="findThesisByTeacherId" resultMap="ThesisPO">
+        select * from thesis where teacher_id=#{teacherId}
+    </select>
+
     <!-- 结果映射配置 -->
     <resultMap id="ThesisPO" type="com.nju.edu.gtms.model.po.ThesisPO">
         <id column="thesis_id" property="thesisId" />
