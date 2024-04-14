@@ -2,6 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nju.edu.gtms.dao.ReviewDao">
 
+    <select id="getThesisByReviewerId" resultMap="ReviewVO">
+        SELECT
+            t.title,
+            t.thesis_id,
+            s.student_name,
+            tec.teacher_name,
+            t.status
+        FROM
+            reviews r
+                JOIN
+            thesis t ON r.thesis_id = t.thesis_id
+                JOIN
+            teachers tec ON t.teacher_id = tec.teacher_id
+                JOIN
+            students s ON t.student_id = s.student_id
+        WHERE
+            (r.internal_teacher_id = #{teacherId} AND r.internal_teacher_status = '未评审')
+           OR (r.external_teacher_id = #{teacherId} AND r.external_teacher_status = '未评审');
+
+    </select>
+
+    <resultMap id="ReviewVO" type="com.nju.edu.gtms.model.vo.ReviewVO">
+        <result property="title" column="title" />
+        <result property="thesisId" column="thesis_id" />
+        <result property="studentName" column="student_name" />
+        <result property="teacherName" column="teacher_name" />
+        <result property="status" column="status" />
+    </resultMap>
+
+
     <!-- 结果映射配置 -->
     <resultMap id="ReviewPO" type="com.nju.edu.gtms.model.po.ReviewPO">
         <id column="review_id" property="reviewId" />
