@@ -40,4 +40,13 @@ public class TeacherServiceImpl implements TeacherService {
         }
 
     }
+
+    @Override
+    public void updatePhoneByTeacherId(String phone,String teacherId){
+        teacherDao.updatePhoneByTeacherId(phone,teacherId);
+    }
+    @Override
+    public void updateEmailByTeacherId(String email,String teacherId){
+        teacherDao.updateEmailByTeacherId(email,teacherId);
+    }
 }

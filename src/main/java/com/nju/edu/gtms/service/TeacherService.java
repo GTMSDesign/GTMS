@@ -10,4 +10,8 @@ public interface TeacherService {
     TeacherPO getOneById(String teacherId);
 
     void reviewProposal(String thesisId,  String result);
+
+    void updatePhoneByTeacherId(String phone,String teacherId);
+
+    void updateEmailByTeacherId(String email,String teacherId);
 }

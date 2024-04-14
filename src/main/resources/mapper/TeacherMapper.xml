@@ -5,6 +5,12 @@
     <select id="findOneById" resultMap="TeacherPO">
         select * from teachers where teacher_id =#{teacherId}
     </select>
+    <update id="updatePhoneByTeacherId">
+        update teachers set phone=#{phone} where teacher_id =#{teacherId}
+    </update>
+    <update id="updateEmailByTeacherId">
+        update teachers set email=#{email} where teacher_id =#{teacherId}
+    </update>
     <!-- 结果映射配置 -->
     <resultMap id="TeacherPO" type="com.nju.edu.gtms.model.po.TeacherPO">
         <id column="teacher_id" property="teacherId" />

@@ -9,4 +9,8 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface TeacherDao {
     TeacherPO findOneById(String teacherId);
+
+    void updatePhoneByTeacherId(String phone,String teacherId);
+
+    void updateEmailByTeacherId(String email,String teacherId);
 }

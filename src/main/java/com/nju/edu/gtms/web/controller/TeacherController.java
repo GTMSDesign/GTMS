@@ -27,4 +27,17 @@ public class TeacherController {
         teacherService.reviewProposal(thesisId,result);
         return Result.success();
     }
+
+    @PostMapping("/updatePhone")
+    public Result updatePhoneByTeacherId(@RequestParam("phone") String phone,@RequestParam("account") String teacherId ){
+        teacherService.updatePhoneByTeacherId(phone,teacherId);
+        return Result.success();
+    }
+
+    @PostMapping("/updateEmail")
+    public Result updateEmailByTeacherId(@RequestParam("email") String email,@RequestParam("account") String teacherId ){
+        teacherService.updateEmailByTeacherId(email,teacherId);
+        return Result.success();
+    }
+
 }
