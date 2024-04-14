@@ -34,4 +34,6 @@ public class ThesisPO {
     private String thesisUrl;
     //答辩次数
     private int defenseTimes;
+
+    private String proposalUrl;
 }

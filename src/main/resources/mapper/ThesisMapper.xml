@@ -6,6 +6,9 @@
         select * from thesis where teacher_id=#{teacherId}
     </select>
 
+    <select id="findThesisByTeacherIdAndStatus" resultMap="ThesisPO">
+        select * from thesis where teacher_id=#{teacherId} and status=#{status}
+    </select>
     <!-- 结果映射配置 -->
     <resultMap id="ThesisPO" type="com.nju.edu.gtms.model.po.ThesisPO">
         <id column="thesis_id" property="thesisId" />
@@ -20,6 +23,7 @@
         <result column="status" property="status" />
         <result column="thesis_url" property="thesisUrl" />
         <result column="defense_times" property="defenseTimes" javaType="int" />
+        <result column="proposal_url" property="proposalUrl"/>
     </resultMap>
 
 </mapper>

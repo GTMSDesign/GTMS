@@ -10,4 +10,6 @@ import java.util.List;
 @Mapper
 public interface ThesisDao {
     List<ThesisPO> findThesisByTeacherId(String teacherId);
+
+    List<ThesisPO> findThesisByTeacherIdAndStatus(String teacherId,String status);
 }

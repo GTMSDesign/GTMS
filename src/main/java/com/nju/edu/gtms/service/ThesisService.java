@@ -8,4 +8,5 @@ import java.util.List;
 public interface ThesisService{
     List<ThesisPO> getThesisByTeacherId(String teacherId);
 
+    List<ThesisPO> getThesisByTeacherIdAndStatus(String teacherId,String status);
 }

@@ -21,4 +21,9 @@ public class ThesisController {
     public Result getThesisByTeacherId(@RequestParam("account") String teacherId){
         return Result.success(thesisService.getThesisByTeacherId(teacherId));
     }
+
+    @GetMapping("/getThesisByTeacherIdAndStatus")
+    public Result getThesisByTeacherIdAndStatus(@RequestParam("account") String teacherId,@RequestParam("status")String status){
+        return Result.success(thesisService.getThesisByTeacherIdAndStatus(teacherId,status));
+    }
 }
