@@ -9,6 +9,18 @@
     <select id="findThesisByTeacherIdAndStatus" resultMap="ThesisPO">
         select * from thesis where teacher_id=#{teacherId} and status=#{status}
     </select>
+
+    <select id="findOneByThesisId" resultMap="ThesisPO">
+        select * from thesis where thesis_id=#{ThesisId}
+    </select>
+
+    <update id="setThesisStatue" timeout="10">
+        update thesis set status = #{status} where thesis_id=#{thesisId}
+    </update>
+
+    <delete id="deleteOneByThesisId" timeout="10">
+        delete from thesis where thesis_id=#{thesisId}
+    </delete>
     <!-- 结果映射配置 -->
     <resultMap id="ThesisPO" type="com.nju.edu.gtms.model.po.ThesisPO">
         <id column="thesis_id" property="thesisId" />

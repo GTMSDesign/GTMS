@@ -2,9 +2,12 @@ package com.nju.edu.gtms.service;
 
 import com.nju.edu.gtms.model.po.TeacherPO;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public interface TeacherService {
 
     TeacherPO getOneById(String teacherId);
+
+    void reviewProposal(String thesisId,  String result);
 }

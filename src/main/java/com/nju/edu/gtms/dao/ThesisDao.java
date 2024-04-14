@@ -11,5 +11,11 @@ import java.util.List;
 public interface ThesisDao {
     List<ThesisPO> findThesisByTeacherId(String teacherId);
 
+    ThesisPO findOneByThesisId(String ThesisId);
+
     List<ThesisPO> findThesisByTeacherIdAndStatus(String teacherId,String status);
+
+    void setThesisStatue(String status,String thesisId);
+
+    void deleteOneByThesisId(String thesisId);
 }
