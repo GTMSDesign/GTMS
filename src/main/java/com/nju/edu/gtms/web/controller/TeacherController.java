@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path = "/teacher")
 public class TeacherController {
-    private final TeacherService teacherService;;
+    private final TeacherService teacherService;
 
     @Autowired
     public TeacherController(TeacherService teacherService){
