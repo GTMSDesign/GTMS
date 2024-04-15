@@ -26,7 +26,6 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public void reviewProposal(String thesisId, String result) {
-        System.out.println(thesisId+" "+result);
         //先根据thesis查到对应PO
         ThesisPO thesisPO = thesisDao.findOneByThesisId(thesisId);
         if(thesisPO==null||!thesisPO.getStatus().equals("待开题")){
@@ -40,7 +39,14 @@ public class TeacherServiceImpl implements TeacherService {
         }
 
     }
-
+    @Override
+    public void approveDraft(String thesisId) {
+        ThesisPO thesisPO = thesisDao.findOneByThesisId(thesisId);
+        if(thesisPO==null||!thesisPO.getStatus().equals("完成初稿")){
+            return;
+        }
+        thesisDao.setThesisStatue("初步定稿",thesisId);
+    }
     @Override
     public void updatePhoneByTeacherId(String phone,String teacherId){
         teacherDao.updatePhoneByTeacherId(phone,teacherId);

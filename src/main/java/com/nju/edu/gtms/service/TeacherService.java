@@ -14,4 +14,6 @@ public interface TeacherService {
     void updatePhoneByTeacherId(String phone,String teacherId);
 
     void updateEmailByTeacherId(String email,String teacherId);
+
+    void approveDraft(String thesisId);
 }

@@ -30,7 +30,11 @@ public class TeacherController {
         teacherService.reviewProposal(thesisId,result);
         return Result.success();
     }
-
+    @PostMapping("/approveDraft")
+    public Result approveDraft(@RequestParam String thesisId){
+        teacherService.approveDraft(thesisId);
+        return Result.success();
+    }
     @PostMapping("/updatePhone")
     public Result updatePhoneByTeacherId(@RequestParam("phone") String phone,@RequestParam("account") String teacherId ){
         teacherService.updatePhoneByTeacherId(phone,teacherId);
