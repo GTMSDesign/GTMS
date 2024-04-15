@@ -62,8 +62,10 @@ public class EmailServiceImpl implements EmailService {
         mimeMessageHelper.setText(body);
         //文件路径
         byte[] bytes = attach.getBytes();
-        String name = attach.getName();
-        mimeMessageHelper.addAttachment(name, new ByteArrayResource(bytes));
+        String name = attach.getOriginalFilename();
+        if (name != null) {
+            mimeMessageHelper.addAttachment(name, new ByteArrayResource(bytes));
+        }
         javaMailSender.send(mimeMailMessage);
     }
 

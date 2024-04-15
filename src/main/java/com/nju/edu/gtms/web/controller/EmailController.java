@@ -28,7 +28,7 @@ public class EmailController {
         return Result.success();
     }
 
-    @PostMapping("sendAttachmentMail")
+    @PostMapping("/sendAttachmentMail")
     public Result sendAttachmentMail(
             @RequestParam String userId,
             @RequestParam String subject,
