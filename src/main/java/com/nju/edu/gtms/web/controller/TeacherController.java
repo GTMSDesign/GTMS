@@ -5,6 +5,9 @@ import com.nju.edu.gtms.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 
 @RestController
 @RequestMapping(path = "/teacher")
@@ -39,5 +42,10 @@ public class TeacherController {
         teacherService.updateEmailByTeacherId(email,teacherId);
         return Result.success();
     }
-
+    @PostMapping("/upload")
+    public Result upload(@RequestParam("file") MultipartFile file){
+        System.out.println(file);
+        System.out.println("############");
+        return Result.success("www.baidu.com"+ file.getName());
+    }
 }
