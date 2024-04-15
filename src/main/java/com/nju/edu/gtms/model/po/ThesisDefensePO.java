@@ -12,7 +12,6 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class ThesisDefensePO {
-
     private String defenseId;
 
     private String thesisId;
@@ -40,4 +39,47 @@ public class ThesisDefensePO {
     private Date date; // 答辩时间
 
     private String review; // 答辩三个一评价
+
+    public void setDefenseId(String defenseId) {
+        this.defenseId = defenseId;
+    }
+    public void setThesisId(String thesisId) {
+        this.thesisId = thesisId;
+    }
+    public void setSecretary(String secretary) {
+        this.secretary = secretary;
+    }
+    public void setTeacher1(String teacher1) {
+        this.teacher1 = teacher1;
+    }
+    public void setTeacher2(String teacher2) {
+        this.teacher2 = teacher2;
+    }
+    public void setTeacher3(String teacher3) {
+        this.teacher3 = teacher3;
+    }
+    public void setConclusion(String conclusion) {
+        this.conclusion = conclusion;
+    }
+    public void setResolution(String resolution) {
+        this.resolution = resolution;
+    }
+    public String getDefenseRemarks() {
+        return defenseRemarks;
+    }
+    public void setDefenseUrl(String defenseUrl) {
+        this.defenseUrl = defenseUrl;
+    }
+    public void setResolutionUrl(String resolutionUrl) {
+        this.resolutionUrl = resolutionUrl;
+    }
+    public void setPlace(String place) {
+        this.place = place;
+    }    public void setDate(Date date) {
+        this.date = date;
+    }
+    public void setReview(String review) {
+        this.review = review;
+    }
+
 }
