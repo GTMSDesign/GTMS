@@ -18,4 +18,8 @@ public interface ThesisDao {
     void setThesisStatue(String status,String thesisId);
 
     void deleteOneByThesisId(String thesisId);
+
+    void fileUpload(String thesis_id, String type, String url);
+
+    String fileDownload(String id, String type);
 }

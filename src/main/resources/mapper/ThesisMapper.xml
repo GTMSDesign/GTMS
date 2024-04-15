@@ -21,6 +21,22 @@
     <delete id="deleteOneByThesisId" timeout="10">
         delete from thesis where thesis_id=#{thesisId}
     </delete>
+
+    <update id="fileUpload" timeout="10">
+        update thesis
+        <set>
+            <if test="type != null">
+                ${type} = #{url},
+            </if>
+        </set>
+        where thesis_id = #{thesis_id}
+    </update>
+
+    <select id="fileDownload" timeout="10" resultType="String">
+        select ${type} FROM thesis WHERE thesis_id = #{id}
+    </select>
+
+
     <!-- 结果映射配置 -->
     <resultMap id="ThesisPO" type="com.nju.edu.gtms.model.po.ThesisPO">
         <id column="thesis_id" property="thesisId" />

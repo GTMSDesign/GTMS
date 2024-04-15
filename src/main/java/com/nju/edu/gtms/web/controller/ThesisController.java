@@ -1,7 +1,6 @@
 package com.nju.edu.gtms.web.controller;
 
 import com.nju.edu.gtms.model.po.ThesisPO;
-import com.nju.edu.gtms.model.vo.FileStoreVO;
 import com.nju.edu.gtms.service.AccountService;
 import com.nju.edu.gtms.service.ThesisService;
 import com.nju.edu.gtms.util.Result;
@@ -27,12 +26,5 @@ public class ThesisController {
     @GetMapping("/getThesisByTeacherIdAndStatus")
     public Result getThesisByTeacherIdAndStatus(@RequestParam("account") String teacherId,@RequestParam("status")String status){
         return Result.success(thesisService.getThesisByTeacherIdAndStatus(teacherId,status));
-    }
-
-    @PostMapping("/upload")
-    public Result fileStore(@RequestPart("file") MultipartFile file, @RequestParam("thesis_id") String thesis_id, @RequestParam("type") String type){
-        FileStoreVO fileStoreVO = new FileStoreVO(thesis_id, type);
-        thesisService.fileStore(file, fileStoreVO);
-        return Result.success();
     }
 }

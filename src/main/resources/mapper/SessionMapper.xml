@@ -2,8 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nju.edu.gtms.dao.SessionDao">
 
+    <update id="fileUpload" timeout="10">
+        update session
+        <set>
+            <if test="type != null">
+                ${type} = #{url},
+            </if>
+        </set>
+        where session_id = #{session_id}
+    </update>
 
-
+    <select id="fileDownload" timeout="10" resultType="String">
+        select ${type} FROM session WHERE session_id = #{id}
+    </select>
     <!-- 结果映射配置 -->
     <resultMap id="SessionPO" type="com.nju.edu.gtms.model.po.SessionPO">
         <id column="session_id" property="sessionId" />

@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nju.edu.gtms.dao.ThesisDefenseDao">
 
+    <update id="fileUpload" timeout="10">
+        update thesis_defense
+        <set>
+            <if test="type != null">
+                ${type} = #{url},
+            </if>
+        </set>
+        where defense_id = #{defense_id}
+    </update>
+
+    <select id="fileDownload" timeout="10" resultType="String">
+        select ${type} FROM thesis_defense WHERE defense_id = #{id}
+    </select>
     <!-- 结果映射配置 -->
     <resultMap id="ThesisDefensePO" type="com.nju.edu.gtms.model.po.ThesisDefensePO">
         <id column="defense_id" property="defenseId" />

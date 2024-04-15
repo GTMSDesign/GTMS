@@ -9,17 +9,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class FileStoreVO {
+public class FileTransferVO {
 
-    private String thesis_id;
+    private String id = "000";
 
     private String type;
 
-    public String getThesis_id() {
-        return thesis_id;
+    public String getId() {
+        return id;
     }
 
     public String getType() {
         return type;
     }
+
 }
