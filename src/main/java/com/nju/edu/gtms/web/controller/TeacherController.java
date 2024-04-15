@@ -42,10 +42,4 @@ public class TeacherController {
         teacherService.updateEmailByTeacherId(email,teacherId);
         return Result.success();
     }
-    @PostMapping("/upload")
-    public Result upload(@RequestParam("file") MultipartFile file){
-        System.out.println(file);
-        System.out.println("############");
-        return Result.success("www.baidu.com"+ file.getName());
-    }
 }
