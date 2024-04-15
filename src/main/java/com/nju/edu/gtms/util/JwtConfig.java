@@ -74,9 +74,6 @@ public class JwtConfig {
         } catch (JWTVerificationException | IllegalArgumentException e) { //解析错误 或者 token写错
             throw new AuthenticationException("登录失败") {};
         }
-//        if (decodedjwt.getClaim("exp").asDate().before(new Date())) {
-//            throw new  MyServiceException("A0230", "用户登陆已过期");
-//        }
     }
 
 
