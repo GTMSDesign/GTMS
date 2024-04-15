@@ -9,4 +9,8 @@ public interface ThesisDefenseDao {
     void fileUpload(String defense_id, String type, String url);
 
     String fileDownload(String id, String type);
+
+    void saveInformation(ThesisDefensePO thesisDefensePO)
+
+    ;
 }

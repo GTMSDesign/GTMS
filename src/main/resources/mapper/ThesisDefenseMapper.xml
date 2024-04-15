@@ -15,6 +15,38 @@
     <select id="fileDownload" timeout="10" resultType="String">
         select ${type} FROM thesis_defense WHERE defense_id = #{id}
     </select>
+<!--    <update id = "saveInformation" parameterMap="thesisDefensePO">-->
+<!--        update thesis_defense-->
+<!--        <set>-->
+<!--            <if test="secretary != null"> `secretary`  = #{secretary},</if>-->
+<!--            <if test="teacher_1 != null"> `teacher_1`  = #{teacher_1},</if>-->
+<!--            <if test="teacher_2 != null"> `teacher_2`  = #{teacher_2},</if>-->
+<!--            <if test="teacher_3 != null"> `teacher_3`  = #{teacher_3},</if>-->
+<!--            <if test="conclusion != null"> `conclusion`  = #{conclusion},</if>-->
+<!--            <if test="resolution != null"> `resolution`  = #{resolution},</if>-->
+<!--            <if test="defense_remarks != null"> `defense_remarks`  = #{defense_remarks},</if>-->
+<!--            <if test="defense_url != null"> `defense_url`  = #{defense_url},</if>-->
+<!--            <if test="resolution_url != null"> `resolution_url`  = #{resolution_url},</if>-->
+<!--            <if test="thesis_id != null"> `thesis_id`  = #{thesis_id},</if>-->
+<!--            <if test="place != null"> `place`  = #{place},</if>-->
+<!--            <if test="review != null"> `review`  = #{review},</if>-->
+<!--            <if test="secretary != null"> `secretary`  = #{secretary},</if>-->
+<!--        </set>-->
+<!--        where thesis_id  = #{thesis_id}-->
+<!--    </update>-->
+
+    <insert id = "saveInformation" parameterType="thesisDefensePO">
+        insert into thesis_defense
+        ('defense_id','thesis_id', 'secretary', '', '', '',
+        'conclusion', 'resolution', 'defense_remarks', 'defense_url',
+        'resolution_url', '', '', 'review'
+        ) values (
+        #{defenseId}, #{thesisId}, #{secretary}, #{teacher1}, #{teacher2}, #{teacher3},
+        #{conclusion}, #{resolution}, #{defenseRemarks}, #{defenseUrl},
+        #{resolutionUrl}, #{place}, #{date}, #{review}
+        )
+    </insert>
+
     <!-- 结果映射配置 -->
     <resultMap id="ThesisDefensePO" type="com.nju.edu.gtms.model.po.ThesisDefensePO">
         <id column="defense_id" property="defenseId" />
