@@ -10,4 +10,6 @@ public interface ThesisService{
     List<ThesisPO> getThesisByTeacherId(String teacherId);
 
     List<ThesisPO> getThesisByTeacherIdAndStatus(String teacherId,String status);
+
+    ThesisPO getThesisByThesisId(String thesisId);
 }
