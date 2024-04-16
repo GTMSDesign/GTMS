@@ -28,7 +28,7 @@ public class FileTransferController {
 
     @GetMapping("/download")
     public Result fileDownload(@RequestParam("id") String id, @RequestParam("type") String type){
-        ResponseEntity<byte[]> responseEntity = fileTransferService.fileDownload(id, type);
-        return Result.success(responseEntity);
+        String obsUrl = fileTransferService.fileDownload(id, type);
+        return Result.success(obsUrl);
     }
 }

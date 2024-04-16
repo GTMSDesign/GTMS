@@ -9,5 +9,5 @@ import org.springframework.web.multipart.MultipartFile;
 public interface FileTransferService {
     void fileUpload(MultipartFile file, FileTransferVO fileTransferVO);
 
-    ResponseEntity<byte[]> fileDownload(String id, String type);
+    String fileDownload(String id, String type);
 }

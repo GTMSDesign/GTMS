@@ -6,6 +6,7 @@ import com.nju.edu.gtms.dao.ThesisDefenseDao;
 import com.nju.edu.gtms.model.vo.FileTransferVO;
 import com.nju.edu.gtms.service.FileTransferService;
 import com.nju.edu.gtms.util.Result;
+import com.obs.services.ObsClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,6 +18,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import org.springframework.http.HttpHeaders;
+
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -28,6 +31,19 @@ public class FileTransferServiceImpl implements FileTransferService {
     private ThesisDao thesisDao;
     private ThesisDefenseDao thesisDefenseDao;
     private SessionDao sessionDao;
+
+    private static final String endPoint = "obs.cn-east-3.myhuaweicloud.com";
+    private static final String ak = "LRJMKGBXMMTHZVAQHDZU";
+    private static final String sk = "JboaeRrJMOOF0Hf6bwxjLs2nke1obvZjZty04dUn";
+    public static String BUCKET_NAME = "marweey";//你创建的桶名
+
+    public void ObsUpload(String bucketName, String key, InputStream inputStream) throws IOException {
+        // 创建ObsClient实例
+        ObsClient obsClient = new ObsClient(ak, sk, endPoint);
+        obsClient.putObject(bucketName, key, inputStream);
+        obsClient.close();
+    }
+
     @Autowired
     public FileTransferServiceImpl(ThesisDao thesisDao, ThesisDefenseDao thesisDefenseDao, SessionDao sessionDao){
         this.thesisDao = thesisDao;
@@ -56,8 +72,12 @@ public class FileTransferServiceImpl implements FileTransferService {
             Path filePath = Paths.get(folderPath, newFilename);
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
+            InputStream inputStream = file.getInputStream();
+            System.out.println(folderPath + "/" + newFilename);
+            ObsUpload(BUCKET_NAME, folderPath + "/" + newFilename, inputStream);
+
             //保存url到thesis库
-            String url = folderPath + "/" + newFilename;
+            String url = "https://marweey.obs.cn-east-3.myhuaweicloud.com/" + folderPath + "/" + newFilename;
             String typeFormatted = type + "_url";
             switch (type) {
                 case "opinion":
@@ -82,7 +102,7 @@ public class FileTransferServiceImpl implements FileTransferService {
     }
 
     @Override
-    public ResponseEntity<byte[]> fileDownload(String id, String type){
+    public String fileDownload(String id, String type){
         try {
             // 指定要下载的文件路径
             String filePath = "";
@@ -106,23 +126,25 @@ public class FileTransferServiceImpl implements FileTransferService {
                     break;
             }
 
-            Path path = Paths.get(filePath);
-            String[] fileNameArr = filePath.split("/");
-            String fileName = fileNameArr[fileNameArr.length - 1];
-            // 读取文件内容为字节数组
-            byte[] data = Files.readAllBytes(path);
+//            Path path = Paths.get(filePath);
+//            String[] fileNameArr = filePath.split("/");
+//            String fileName = fileNameArr[fileNameArr.length - 1];
+//            // 读取文件内容为字节数组
+//            byte[] data = Files.readAllBytes(path);
+//
+//            // 设置响应头
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+//            headers.setContentDispositionFormData("attachment", fileName);
+//            headers.setContentLength(data.length);
+//
+//            // 返回 ResponseEntity 包含文件内容和响应头信息
+//            return ResponseEntity.ok()
+//                    .headers(headers)
+//                    .body(data);
 
-            // 设置响应头
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-            headers.setContentDispositionFormData("attachment", fileName);
-            headers.setContentLength(data.length);
-
-            // 返回 ResponseEntity 包含文件内容和响应头信息
-            return ResponseEntity.ok()
-                    .headers(headers)
-                    .body(data);
-        }catch (IOException e){
+            return filePath;
+        }catch (Exception e){
             e.printStackTrace();
         }
         return null;
