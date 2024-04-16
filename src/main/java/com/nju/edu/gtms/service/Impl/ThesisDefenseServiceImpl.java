@@ -20,7 +20,7 @@ public class ThesisDefenseServiceImpl implements ThesisDefenseService {
 
         ThesisDefensePO thesisDefensePO = new ThesisDefensePO() ;
 
-        thesisDefensePO.setThesisId(thesisDefenseVO.getThesisId());
+        thesisDefensePO.setThesisId(Integer.parseInt(thesisDefenseVO.getThesisId()));
 
         thesisDefensePO.setConclusion(thesisDefenseVO.getState());
 
@@ -30,7 +30,9 @@ public class ThesisDefenseServiceImpl implements ThesisDefenseService {
 
         thesisDefensePO.setDefenseUrl(thesisDefenseVO.getDefenseUrl());
 
+
         thesisDefenseDao.saveInformation(thesisDefensePO);
+
 
     }
 }

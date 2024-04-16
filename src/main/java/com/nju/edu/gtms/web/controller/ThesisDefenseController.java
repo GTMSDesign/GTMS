@@ -4,13 +4,10 @@ import com.nju.edu.gtms.model.vo.ThesisDefenseVO;
 import com.nju.edu.gtms.service.ThesisDefenseService;
 import com.nju.edu.gtms.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("path = /thesisDefense")
+@RequestMapping(path = "/thesisDefense")
 public class ThesisDefenseController {
 
     private final ThesisDefenseService thesisDefenseService;
@@ -20,9 +17,9 @@ public class ThesisDefenseController {
         }
 
         @PostMapping("/preliminaryResolution")
-        public Result saveInformation(@RequestParam ThesisDefenseVO thesisDefenseVO){
+        public Result saveInformation( ThesisDefenseVO thesisDefenseVO){
             System.out.println("yes");
-
+//            ThesisDefenseVO thesisDefenseVO = new ThesisDefenseVO()
             thesisDefenseService.saveInformation(thesisDefenseVO);
             return Result.success();
         }
