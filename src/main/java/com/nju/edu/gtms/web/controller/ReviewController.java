@@ -21,4 +21,9 @@ public class ReviewController {
     public Result getThesisByReviewerId(@RequestParam("account") String teacherId){
         return Result.success(reviewService.getThesisByReviewerId(teacherId));
     }
+
+    @GetMapping("/getReviewByThesisId")
+    public Result getReviewByThesisId(@RequestParam String thesisId, @RequestParam String role){
+        return Result.success(reviewService.getReviewByThesisId(thesisId,role));
+    }
 }

@@ -23,6 +23,21 @@
 
     </select>
 
+    <select id="getReviewByThesisId" resultMap="ReviewMessageVO">
+        select external_teacher_opinion_student,
+               internal_teacher_opinion_student,
+               external_teacher_opinion_teacher,
+               internal_teacher_opinion_teacher
+        from reviews where thesis_id=#{thesisId}
+    </select>
+
+    <resultMap id="ReviewMessageVO" type="com.nju.edu.gtms.model.vo.ReviewMessageVO">
+        <result property="externalToStudent" column="external_teacher_opinion_student" />
+        <result property="internalToStudent" column="internal_teacher_opinion_student" />
+        <result property="externalToTeacher" column="external_teacher_opinion_teacher" />
+        <result property="internalToTeacher" column="internal_teacher_opinion_teacher" />
+    </resultMap>
+
     <resultMap id="ReviewVO" type="com.nju.edu.gtms.model.vo.ReviewVO">
         <result property="title" column="title" />
         <result property="thesisId" column="thesis_id" />
