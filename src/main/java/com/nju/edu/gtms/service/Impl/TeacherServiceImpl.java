@@ -47,6 +47,16 @@ public class TeacherServiceImpl implements TeacherService {
         }
         thesisDao.setThesisStatue("初步定稿",thesisId);
     }
+
+    @Override
+    public void approveDefence(String thesisId) {
+        ThesisPO thesisPO = thesisDao.findOneByThesisId(thesisId);
+        if(thesisPO==null||!thesisPO.getStatus().equals("待答辩")){
+            return;
+        }
+        thesisDao.setThesisStatue("答辩前定稿",thesisId);
+    }
+
     @Override
     public void updatePhoneByTeacherId(String phone,String teacherId){
         teacherDao.updatePhoneByTeacherId(phone,teacherId);
