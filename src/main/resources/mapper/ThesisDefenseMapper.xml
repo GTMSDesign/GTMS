@@ -16,10 +16,10 @@
         select ${type} FROM thesis_defense WHERE defense_id = #{id}
     </select>
 
-    <update id = "saveInformation" parameterMap="thesisDefensePO">
-        update defense_id
+    <update id = "saveInformation" parameterType="com.nju.edu.gtms.model.po.ThesisDefensePO">
+        update thesis_defense
         <set>
-            <if test="thesis_id != null"> `thesis_id`  = #{defenseId},</if>
+            <if test="defense_id != null"> `defense_id`  = #{defenseId},</if>
             <if test="secretary != null"> `secretary`  = #{secretary},</if>
             <if test="teacher_1 != null"> `teacher_1`  = #{teacher1},</if>
             <if test="teacher_2 != null"> `teacher_2`  = #{teacher2},</if>
@@ -48,7 +48,6 @@
 <!--        #{resolutionUrl}, #{place}, #{date}, #{review}-->
 <!--        )-->
 <!--    </insert>-->
-
     <!-- 结果映射配置 -->
     <resultMap id="ThesisDefensePO" type="com.nju.edu.gtms.model.po.ThesisDefensePO">
         <id column="defense_id" property="defenseId" />
