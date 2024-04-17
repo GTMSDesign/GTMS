@@ -2,7 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nju.edu.gtms.dao.DistributionDao">
 
-
+    <select id="getStudentIdByTeacherId" resultType="String">
+        select student_id from distribution where teacher_id = #{teacherId}
+    </select>
 
     <!-- 结果映射配置 -->
     <resultMap id="AccountPO" type="com.nju.edu.gtms.model.po.AccountPO">

@@ -41,7 +41,7 @@ public class StudentPO {
 
     private int fairCourses;
 
-    private int pass_courses;
+    private int passCourses;
     //是否分配
     private String distribute;
 
