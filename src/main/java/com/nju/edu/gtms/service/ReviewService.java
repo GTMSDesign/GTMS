@@ -15,7 +15,7 @@ public interface ReviewService {
 
     List<ReviewVO> getThesisByReviewerId(String teacherId);
 
-    ReviewMessageVO getReviewByThesisId(String thesisId, String role);
+    ReviewMessageVO getReviewByThesisId(String thesisId);
 
     List<ReviewRuleVO> getReviewRules();
 

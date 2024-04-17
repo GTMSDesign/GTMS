@@ -81,8 +81,9 @@ public class FileTransferServiceImpl implements FileTransferService {
             String typeFormatted = type + "_url";
             switch (type) {
                 case "opinion":
+                    thesisDao.fileUpload(id, typeFormatted, url);
                 case "thesis":
-                    thesisDao.fileUpload(id, typeFormatted,url);
+                    thesisDao.fileUpload(id, typeFormatted, url);
                 case "proposal":
                     thesisDao.fileUpload(id, typeFormatted, url);
                     break;
@@ -111,8 +112,7 @@ public class FileTransferServiceImpl implements FileTransferService {
             String typeFormatted = type + "_url";
             switch (type) {
                 case "opinion":
-                case "thesis":
-                case "proposal":
+                case "thesis", "proposal":
                     filePath = thesisDao.fileDownload(id, typeFormatted);
                     break;
                 case "defense":

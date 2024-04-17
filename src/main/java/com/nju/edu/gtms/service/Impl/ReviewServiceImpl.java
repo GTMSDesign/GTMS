@@ -32,7 +32,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public ReviewMessageVO getReviewByThesisId(String thesisId, String role) {
+    public ReviewMessageVO getReviewByThesisId(String thesisId) {
         return reviewDao.getReviewMessageByThesisId(thesisId);
     }
 
