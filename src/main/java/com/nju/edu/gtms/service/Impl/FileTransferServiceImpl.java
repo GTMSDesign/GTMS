@@ -82,6 +82,7 @@ public class FileTransferServiceImpl implements FileTransferService {
             switch (type) {
                 case "opinion":
                 case "thesis":
+                    thesisDao.fileUpload(id, typeFormatted,url);
                 case "proposal":
                     thesisDao.fileUpload(id, typeFormatted, url);
                     break;
