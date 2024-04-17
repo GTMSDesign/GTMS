@@ -14,14 +14,22 @@ public class ThesisDefenseController {
     @Autowired
     public ThesisDefenseController(ThesisDefenseService thesisDefenseService){
             this.thesisDefenseService = thesisDefenseService;
-        }
-
-        @PostMapping("/preliminaryResolution")
-        public Result saveInformation( ThesisDefenseVO thesisDefenseVO){
-            System.out.println("yes");
-//            ThesisDefenseVO thesisDefenseVO = new ThesisDefenseVO()
-            thesisDefenseService.saveInformation(thesisDefenseVO);
-            return Result.success();
-        }
     }
+
+    @PostMapping("/preliminaryResolution")
+    public Result saveInformation( ThesisDefenseVO thesisDefenseVO){
+        System.out.println("yes");
+//           ThesisDefenseVO thesisDefenseVO = new ThesisDefenseVO()
+        thesisDefenseService.saveInformation(thesisDefenseVO);
+        return Result.success();
+    }
+
+    @GetMapping("/findDefenseByThesisId")
+    public Result findDefenseByThesisId(@RequestParam("thesisId") String thesisId){
+        System.out.println("111111111111");
+        return Result.success(thesisDefenseService.findDefenseByThesisId(thesisId));
+    }
+
+
+}
 

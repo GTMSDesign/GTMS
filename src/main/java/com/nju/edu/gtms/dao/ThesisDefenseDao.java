@@ -11,5 +11,7 @@ public interface ThesisDefenseDao {
 
     String fileDownload(String id, String type);
 
+    ThesisDefensePO findDefenseByThesisId(String thesisId);
+
     void saveInformation(ThesisDefensePO thesisDefensePO);
 }

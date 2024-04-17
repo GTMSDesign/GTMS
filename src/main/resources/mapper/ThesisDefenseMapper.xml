@@ -16,6 +16,10 @@
         select ${type} FROM thesis_defense WHERE defense_id = #{id}
     </select>
 
+    <select id="findDefenseByThesisId" resultMap="ThesisDefensePO">
+        select * from thesis_defense where thesis_id = #{thesisId}
+    </select>
+
     <update id = "saveInformation" parameterType="com.nju.edu.gtms.model.po.ThesisDefensePO">
         update thesis_defense
         <set>

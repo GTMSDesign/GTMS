@@ -41,6 +41,12 @@ public class TeacherController {
         return Result.success();
     }
 
+    @PostMapping("/approveDeffer")
+    public Result approveDeffer(@RequestParam String thesisId){
+        teacherService.approveDeffer(thesisId);
+        return Result.success();
+    }
+
     @PostMapping("/updatePhone")
     public Result updatePhoneByTeacherId(@RequestParam("phone") String phone,@RequestParam("account") String teacherId ){
         teacherService.updatePhoneByTeacherId(phone,teacherId);

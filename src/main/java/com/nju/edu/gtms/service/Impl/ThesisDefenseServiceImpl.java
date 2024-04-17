@@ -35,4 +35,11 @@ public class ThesisDefenseServiceImpl implements ThesisDefenseService {
 
 
     }
+
+    @Override
+    public ThesisDefensePO findDefenseByThesisId(String thesisId){
+        return thesisDefenseDao.findDefenseByThesisId(thesisId);
+    }
+
+
 }

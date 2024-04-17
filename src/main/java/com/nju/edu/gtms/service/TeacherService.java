@@ -18,4 +18,6 @@ public interface TeacherService {
     void approveDraft(String thesisId);
 
     void approveDefence(String thesisId);
+
+    void approveDeffer(String thesisId);
 }
