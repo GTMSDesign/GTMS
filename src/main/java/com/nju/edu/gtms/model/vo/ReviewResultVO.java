@@ -5,17 +5,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.PrimitiveIterator;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ReviewMessageVO {
+public class ReviewResultVO {
+    private String thesisId;
 
-    private String internalComment;
+    private int score;
 
-    private String internalAdvice;
+    private String teacherId;
 
-    private String externalComment;
+    private String comment;
 
-    private String externalAdvice;
+    private String advice;
+
 }

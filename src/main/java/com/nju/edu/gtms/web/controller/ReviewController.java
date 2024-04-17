@@ -1,12 +1,10 @@
 package com.nju.edu.gtms.web.controller;
 
+import com.nju.edu.gtms.model.vo.ReviewResultVO;
 import com.nju.edu.gtms.service.ReviewService;
 import com.nju.edu.gtms.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/review")
@@ -25,5 +23,16 @@ public class ReviewController {
     @GetMapping("/getReviewByThesisId")
     public Result getReviewByThesisId(@RequestParam String thesisId, @RequestParam String role){
         return Result.success(reviewService.getReviewByThesisId(thesisId,role));
+    }
+
+    @GetMapping("/getReviewRules")
+    public Result getReviewRules(){
+        return Result.success(reviewService.getReviewRules());
+    }
+
+    @PostMapping("/submitReview")
+    public Result submitReview(@RequestBody ReviewResultVO resultVO){
+        reviewService.submitReview(resultVO);
+        return Result.success();
     }
 }

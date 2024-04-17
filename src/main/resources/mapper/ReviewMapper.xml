@@ -18,24 +18,52 @@
                 JOIN
             students s ON t.student_id = s.student_id
         WHERE
-            (r.internal_teacher_id = #{teacherId} AND r.internal_teacher_status = '未评审')
-           OR (r.external_teacher_id = #{teacherId} AND r.external_teacher_status = '未评审');
+            (r.internal_teacher_id = #{teacherId} AND r.internal_score = -1)
+           OR (r.external_teacher_id = #{teacherId} AND r.internal_score = -1);
 
     </select>
+    <select id="getRules" resultMap="ReviewRuleVO">
+        select review_item,review_element,max_score from review_rules
+    </select>
 
-    <select id="getReviewByThesisId" resultMap="ReviewMessageVO">
-        select external_teacher_opinion_student,
-               internal_teacher_opinion_student,
-               external_teacher_opinion_teacher,
-               internal_teacher_opinion_teacher
+    <update id="updateReview" parameterType="com.nju.edu.gtms.model.po.ReviewPO">
+        UPDATE reviews
+        SET
+            thesis_id = #{thesisId},
+            internal_teacher_id = #{internalTeacherId},
+            internal_comment = #{internalComment},
+            internal_advice = #{internalAdvice},
+            internal_score = #{internalScore},
+            external_teacher_id = #{externalTeacherId},
+            external_comment = #{externalComment},
+            external_advice = #{externalAdvice},
+            external_score = #{externalScore},
+            date = #{date}
+        WHERE review_id = #{reviewId}
+    </update>
+
+    <select id="getReviewMessageByThesisId" resultMap="ReviewMessageVO">
+        select internal_comment,
+               internal_advice,
+               external_comment,
+               external_advice
         from reviews where thesis_id=#{thesisId}
     </select>
+    <select id="getReviewByThesisId" resultMap="ReviewPO">
+        select *
+        from reviews where thesis_id=#{thesisId};
+    </select>
+    <resultMap id="ReviewRuleVO" type="com.nju.edu.gtms.model.vo.ReviewRuleVO">
+        <result property="reviewItem" column="review_item" />
+        <result property="reviewElement" column="review_element" />
+        <result property="maxScore" column="max_score" />
+    </resultMap>
 
     <resultMap id="ReviewMessageVO" type="com.nju.edu.gtms.model.vo.ReviewMessageVO">
-        <result property="externalToStudent" column="external_teacher_opinion_student" />
-        <result property="internalToStudent" column="internal_teacher_opinion_student" />
-        <result property="externalToTeacher" column="external_teacher_opinion_teacher" />
-        <result property="internalToTeacher" column="internal_teacher_opinion_teacher" />
+        <result property="internalComment" column="internal_comment" />
+        <result property="internalAdvice" column="internal_advice" />
+        <result property="externalComment" column="external_comment" />
+        <result property="externalAdvice" column="external_advice" />
     </resultMap>
 
     <resultMap id="ReviewVO" type="com.nju.edu.gtms.model.vo.ReviewVO">
@@ -52,13 +80,13 @@
         <id column="review_id" property="reviewId" />
         <result column="thesis_id" property="thesisId" />
         <result column="internal_teacher_id" property="internalTeacherId" />
-        <result column="internal_teacher_opinion_student" property="internalTeacherOpinionStudent" />
-        <result column="internal_teacher_opinion_teacher" property="internalTeacherOpinionTeacher" />
-        <result column="internal_teacher_status" property="internalTeacherStatus" />
+        <result column="internal_comment" property="internalComment" />
+        <result column="internal_advice" property="internalAdvice" />
+        <result column="internal_score" property="internalScore" />
         <result column="external_teacher_id" property="externalTeacherId" />
-        <result column="external_teacher_opinion_student" property="externalTeacherOpinionStudent" />
-        <result column="external_teacher_opinion_teacher" property="externalTeacherOpinionTeacher" />
-        <result column="external_teacher_status" property="externalTeacherStatus" />
+        <result column="external_comment" property="externalComment" />
+        <result column="external_advice" property="externalAdvice" />
+        <result column="external_score" property="externalScore" />
         <result column="date" property="date" javaType="java.util.Date" />
     </resultMap>
 

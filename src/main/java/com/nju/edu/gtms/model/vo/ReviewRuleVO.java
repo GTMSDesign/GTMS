@@ -9,13 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ReviewMessageVO {
+public class ReviewRuleVO {
+    private String reviewItem;
 
-    private String internalComment;
+    private String reviewElement;
 
-    private String internalAdvice;
+    private int maxScore;
 
-    private String externalComment;
 
-    private String externalAdvice;
 }
