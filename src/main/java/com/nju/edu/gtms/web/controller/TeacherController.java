@@ -47,6 +47,13 @@ public class TeacherController {
         return Result.success();
     }
 
+    @PostMapping("/defenseResolution")
+    public Result defenseResolution(@RequestParam String thesisId){
+        teacherService.defenseResolution(thesisId);
+        return Result.success();
+    }
+
+
     @PostMapping("/updatePhone")
     public Result updatePhoneByTeacherId(@RequestParam("phone") String phone,@RequestParam("account") String teacherId ){
         teacherService.updatePhoneByTeacherId(phone,teacherId);
