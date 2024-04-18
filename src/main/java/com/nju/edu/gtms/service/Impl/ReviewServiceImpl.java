@@ -3,10 +3,7 @@ package com.nju.edu.gtms.service.Impl;
 import com.nju.edu.gtms.dao.ReviewDao;
 import com.nju.edu.gtms.dao.ThesisDao;
 import com.nju.edu.gtms.model.po.ReviewPO;
-import com.nju.edu.gtms.model.vo.ReviewMessageVO;
-import com.nju.edu.gtms.model.vo.ReviewResultVO;
-import com.nju.edu.gtms.model.vo.ReviewRuleVO;
-import com.nju.edu.gtms.model.vo.ReviewVO;
+import com.nju.edu.gtms.model.vo.*;
 import com.nju.edu.gtms.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,5 +68,10 @@ public class ReviewServiceImpl implements ReviewService {
         }else {
             thesisDao.setThesisStatue("完成初稿",resultVO.getThesisId());
         }
+    }
+
+    @Override
+    public List<ReviewConclusionVO> getReviewConclusionByTeacherId(String teacherId) {
+        return reviewDao.getReviewConclusion(teacherId);
     }
 }

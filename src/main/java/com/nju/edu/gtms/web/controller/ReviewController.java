@@ -25,6 +25,12 @@ public class ReviewController {
         return Result.success(reviewService.getReviewByThesisId(thesisId));
     }
 
+    @GetMapping("/getReviewConclusionByTeacherId")
+    public Result getReviewConclusionByTeacherId(@RequestParam String teacherId){
+        return Result.success(reviewService.getReviewConclusionByTeacherId(teacherId));
+    }
+
+
     @GetMapping("/getReviewRules")
     public Result getReviewRules(){
         return Result.success(reviewService.getReviewRules());

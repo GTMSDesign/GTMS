@@ -1,6 +1,7 @@
 package com.nju.edu.gtms.dao;
 
 import com.nju.edu.gtms.model.po.ReviewPO;
+import com.nju.edu.gtms.model.vo.ReviewConclusionVO;
 import com.nju.edu.gtms.model.vo.ReviewMessageVO;
 import com.nju.edu.gtms.model.vo.ReviewRuleVO;
 import com.nju.edu.gtms.model.vo.ReviewVO;
@@ -20,4 +21,6 @@ public interface ReviewDao {
     List<ReviewRuleVO> getRules();
 
     void updateReview(ReviewPO reviewPO);
+
+    List<ReviewConclusionVO> getReviewConclusion(String teacherId);
 }
