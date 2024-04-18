@@ -23,6 +23,11 @@ public class ThesisDefenseController {
         thesisDefenseService.saveInformation(thesisDefenseVO);
         return Result.success();
     }
+    @GetMapping("/getThesisByTeacherId")
+    public Result getThesisByTeacherId(@RequestParam("account") String teacherId){
+        System.out.println(thesisDefenseService.getThesisByTeacherId(teacherId));
+        return Result.success(thesisDefenseService.getThesisByTeacherId(teacherId));
+    }
 
     @GetMapping("/findDefenseByThesisId")
     public Result findDefenseByThesisId(@RequestParam("thesisId") String thesisId){

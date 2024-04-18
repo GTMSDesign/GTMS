@@ -41,6 +41,10 @@
         where defense_id  = #{defenseId}
     </update>
 
+    <select id="findThesisByTeacherId" resultMap="ThesisDefensePO">
+        select * from thesis_defense where secretary=#{teacherId}
+    </select>
+
 <!--    <insert id = "saveInformation" parameterType="thesisDefensePO">-->
 <!--        insert into thesis_defense-->
 <!--        (`defense_id`,`thesis_id`, `secretary`, `teacher_1`, `teacher_2`, `teacher_3`,-->
