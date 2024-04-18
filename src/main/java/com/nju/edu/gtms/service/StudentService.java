@@ -7,5 +7,6 @@ import org.springframework.stereotype.Service;
 public interface StudentService {
 
     StudentPO getStudentById(String studentId);
+    String getStudentNameById(String studentId);
 
 }

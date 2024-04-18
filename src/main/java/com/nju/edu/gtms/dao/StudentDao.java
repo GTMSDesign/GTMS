@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface StudentDao {
     StudentPO findOneById(String studentId);
-
     void insertStudentPO(StudentPO studentPO);
+    String getStudentNameById(String studentId);
 }

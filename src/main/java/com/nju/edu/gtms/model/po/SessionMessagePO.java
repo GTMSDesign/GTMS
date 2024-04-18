@@ -5,20 +5,25 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SessionPO {
+public class SessionMessagePO {
+
+    private String messageId;
 
     private String sessionId;
 
-    private String teacherId;
+    private String title;
 
-    private String studentId;
+    private String remarks; // 文档附言
 
-    private Date sessionTime; // 日期
+    private String messageUrl; // 附件地址url
+
+    private Timestamp messageTime; // 日期
 
 }

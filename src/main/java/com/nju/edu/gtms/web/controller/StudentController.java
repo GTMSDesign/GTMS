@@ -25,5 +25,8 @@ public class StudentController {
         return Result.success(studentService.getStudentById(studentId));
     }
 
-
+    @GetMapping("/getStudentNameById")
+    public Result getStudentNameById(@RequestParam("studentId") String studentId){
+        return Result.success(studentService.getStudentNameById(studentId));
+    }
 }

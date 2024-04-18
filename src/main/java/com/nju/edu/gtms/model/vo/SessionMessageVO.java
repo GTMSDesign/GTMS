@@ -1,4 +1,4 @@
-package com.nju.edu.gtms.model.po;
+package com.nju.edu.gtms.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,14 +11,11 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SessionPO {
+public class SessionMessageVO {
 
     private String sessionId;
 
-    private String teacherId;
+    private String title;
 
-    private String studentId;
-
-    private Date sessionTime; // 日期
-
+    private String remarks; // 文档附言
 }

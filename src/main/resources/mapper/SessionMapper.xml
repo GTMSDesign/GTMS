@@ -15,15 +15,48 @@
     <select id="fileDownload" timeout="10" resultType="String">
         select ${type} FROM session WHERE session_id = #{id}
     </select>
+
+    <insert id="submitSessionVO" parameterType="com.nju.edu.gtms.model.vo.SessionVO" useGeneratedKeys="true" keyProperty="insertedKeyHolder.insertedId">
+        insert into session (teacher_id, student_id, session_time) values (
+                                                                         #{sessionVO.teacherId},
+                                                                         #{sessionVO.studentId},
+                                                                         CURRENT_TIMESTAMP
+                                                                     )
+    </insert>
+
+    <insert id="submitSessionMessageVO" parameterType="com.nju.edu.gtms.model.vo.SessionMessageVO">
+        insert into session_message values(
+                                      null,
+                                      #{sessionId},
+                                      #{title},
+                                      #{remarks},
+                                      null,
+                                      CURRENT_TIMESTAMP
+                                  )
+    </insert>
+
+    <select id="getSessionByTeacherId" resultMap="SessionPO">
+        select * from session where teacher_id = #{teacherId}
+    </select>
+
+    <select id="getSessionMessage" resultMap="SessionMessagePO">
+        select * from session_message where session_id = #{sessionId}
+    </select>
     <!-- 结果映射配置 -->
     <resultMap id="SessionPO" type="com.nju.edu.gtms.model.po.SessionPO">
         <id column="session_id" property="sessionId" />
         <result column="teacher_id" property="teacherId" />
         <result column="student_id" property="studentId" />
+        <result column="session_time" property="sessionTime"  />
+    </resultMap>
+
+    <resultMap id="SessionMessagePO" type="com.nju.edu.gtms.model.po.SessionMessagePO">
+        <id column="message_id" property="messageId" />
+        <result column="session_id" property="sessionId" />
         <result column="title" property="title" />
         <result column="remarks" property="remarks" />
-        <result column="url" property="url" />
-        <result column="date" property="date"  />
+        <result column="message_url" property="messageUrl" />
+        <result column="message_time" property="messageTime"  />
     </resultMap>
 
 </mapper>

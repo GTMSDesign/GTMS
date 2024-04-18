@@ -22,4 +22,9 @@ public class StudentServiceImpl implements StudentService {
     public StudentPO getStudentById(String studentId) {
         return studentDao.findOneById(studentId);
     }
+
+    @Override
+    public String getStudentNameById(String studentId) {
+        return studentDao.getStudentNameById(studentId);
+    }
 }

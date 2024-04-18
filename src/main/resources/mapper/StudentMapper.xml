@@ -27,6 +27,10 @@
                                    )
     </insert>
 
+    <select id="getStudentNameById" resultType="String">
+        select student_name from students where student_id =#{studentId}
+    </select>
+
     <resultMap id="StudentPO" type="com.nju.edu.gtms.model.po.StudentPO">
         <id column="student_id" property="studentId" />
         <result column="student_name" property="studentName" />
