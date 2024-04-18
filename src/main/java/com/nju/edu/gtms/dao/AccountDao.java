@@ -15,4 +15,5 @@ public interface AccountDao {
     AccountPO findByAccount(String account);
 
     List<AccountPO> getUnenteredStudents();
+    List<AccountPO> getUnenteredTeachers();
 }

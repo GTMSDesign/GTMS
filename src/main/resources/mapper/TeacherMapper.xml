@@ -11,6 +11,19 @@
     <update id="updateEmailByTeacherId">
         update teachers set email=#{email} where teacher_id =#{teacherId}
     </update>
+    <insert id="insertTeacherPO" parameterType="com.nju.edu.gtms.model.po.TeacherPO">
+        insert into teachers values(
+                                       #{teacherId},
+                                       #{teacherName},
+                                       #{phone},
+                                       #{officePhone},
+                                       #{email},
+                                       #{title},
+                                       #{education},
+                                       #{category}
+                                   )
+    </insert>
+
     <!-- 结果映射配置 -->
     <resultMap id="TeacherPO" type="com.nju.edu.gtms.model.po.TeacherPO">
         <id column="teacher_id" property="teacherId" />
