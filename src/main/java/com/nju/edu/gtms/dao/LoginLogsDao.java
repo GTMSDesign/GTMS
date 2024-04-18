@@ -11,4 +11,6 @@ import java.util.List;
 @Mapper
 public interface LoginLogsDao {
     List<LoginLogsVO> getAllLoginLogs();
+
+    void insertLoginLogs(String userAccount,String ipAddress);
 }

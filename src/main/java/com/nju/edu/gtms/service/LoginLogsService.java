@@ -9,4 +9,6 @@ import java.util.List;
 public interface LoginLogsService {
 
     List<LoginLogsVO> getAllLoginLogs();
+
+    void insertLoginLogs(String userAccount,String ipAddress);
 }

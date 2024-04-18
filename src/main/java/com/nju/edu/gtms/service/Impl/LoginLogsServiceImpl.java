@@ -22,4 +22,9 @@ public class LoginLogsServiceImpl implements LoginLogsService {
     public List<LoginLogsVO> getAllLoginLogs(){
         return loginLogsDao.getAllLoginLogs();
     }
+
+    @Override
+    public void insertLoginLogs(String userAccount, String ipAddress) {
+        loginLogsDao.insertLoginLogs(userAccount,ipAddress);
+    }
 }

@@ -6,6 +6,10 @@
         select * from login_logs
     </select>
 
+    <insert id="insertLoginLogs">
+        insert into login_logs value(null,#{userAccount},CURRENT_TIMESTAMP,#{ipAddress})
+    </insert>
+
 
     <resultMap id="LoginLogsVO" type="com.nju.edu.gtms.model.vo.LoginLogsVO">
         <result property="id" column="id"/>
