@@ -8,6 +8,12 @@
     <select id="findByAccount" resultMap="AccountPO">
         select * from accounts where account =#{account}
     </select>
+    <select id="getUnenteredStudents" resultMap="AccountPO">
+        select a.account, a.name, a.power
+        from accounts a
+        left join students s on a.account=s.student_id
+        where s.student_id is null and a.power = 'student'
+    </select>
     <!-- 结果映射配置 -->
     <resultMap id="AccountPO" type="com.nju.edu.gtms.model.po.AccountPO">
         <id column="account" property="account" />

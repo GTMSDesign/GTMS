@@ -5,6 +5,28 @@
     <select id="findOneById" resultMap="StudentPO">
         select * from students where student_id =#{studentId}
     </select>
+    <insert id="insertStudentPO" parameterType="com.nju.edu.gtms.model.po.StudentPO">
+        insert into students values(
+                                    #{studentId},
+                                    #{studentName},
+                                    #{grade},
+                                    #{phone},
+                                    #{officePhone},
+                                    #{homePhone},
+                                    #{emergencyContactName},
+                                    #{emergencyContactPhone},
+                                    #{email1},
+                                    #{email2},
+                                    #{company},
+                                    #{position},
+                                    #{excellentCourses},
+                                    #{goodCourses},
+                                    #{fairCourses},
+                                    #{passCourses},
+                                    #{distribute}
+                                   )
+    </insert>
+
     <resultMap id="StudentPO" type="com.nju.edu.gtms.model.po.StudentPO">
         <id column="student_id" property="studentId" />
         <result column="student_name" property="studentName" />

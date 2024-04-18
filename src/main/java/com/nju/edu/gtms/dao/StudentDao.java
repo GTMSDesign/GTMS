@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface StudentDao {
     StudentPO findOneById(String studentId);
 
+    void insertStudentPO(StudentPO studentPO);
 }
