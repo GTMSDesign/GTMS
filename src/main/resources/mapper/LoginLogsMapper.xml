@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.edu.gtms.dao.LoginLogsDao">
+
+    <select id="getAllLoginLogs" resultMap="LoginLogsVO">
+        select * from login_logs
+    </select>
+
+
+    <resultMap id="LoginLogsVO" type="com.nju.edu.gtms.model.vo.LoginLogsVO">
+        <result property="id" column="id"/>
+        <result property="userAccount" column="user_account"/>
+        <result property="loginTime" column="login_time"/>
+        <result property="ipAddress" column="ipaddress"/>
+    </resultMap>
+
+</mapper>
