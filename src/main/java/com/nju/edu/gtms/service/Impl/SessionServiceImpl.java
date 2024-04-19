@@ -34,8 +34,12 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public void submitSessionMessageVO(SessionMessageVO sessionMessageVO) {
-        sessionDao.submitSessionMessageVO(sessionMessageVO);
+    public String submitSessionMessageVO(SessionMessageVO sessionMessageVO) {
+        InsertedKeyHolder insertedKeyHolder = new InsertedKeyHolder();
+        sessionDao.submitSessionMessageVO(sessionMessageVO, insertedKeyHolder);
+        String newSessionMessageId;
+        newSessionMessageId = String.valueOf(insertedKeyHolder.getInsertedId());
+        return newSessionMessageId;
     }
 
     @Override

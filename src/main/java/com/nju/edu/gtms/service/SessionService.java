@@ -12,7 +12,7 @@ import java.util.List;
 public interface SessionService {
     String submitSessionVO(SessionVO sessionVO);
 
-    void submitSessionMessageVO(SessionMessageVO sessionMessageVO);
+    String submitSessionMessageVO(SessionMessageVO sessionMessageVO);
 
     List<SessionPO> getSessionByTeacherId(String teacherId);
     List<SessionMessagePO> getSessionMessage(String sessionId);

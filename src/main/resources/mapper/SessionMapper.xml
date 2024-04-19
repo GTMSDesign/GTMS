@@ -3,13 +3,13 @@
 <mapper namespace="com.nju.edu.gtms.dao.SessionDao">
 
     <update id="fileUpload" timeout="10">
-        update session
+        update session_message
         <set>
             <if test="type != null">
                 ${type} = #{url},
             </if>
         </set>
-        where session_id = #{session_id}
+        where message_id = #{message_id}
     </update>
 
     <select id="fileDownload" timeout="10" resultType="String">
@@ -24,12 +24,12 @@
                                                                      )
     </insert>
 
-    <insert id="submitSessionMessageVO" parameterType="com.nju.edu.gtms.model.vo.SessionMessageVO">
-        insert into session_message values(
+    <insert id="submitSessionMessageVO" parameterType="com.nju.edu.gtms.model.vo.SessionMessageVO" useGeneratedKeys="true" keyProperty="insertedKeyHolder.insertedId">
+        insert into session_message (message_id, session_id, title, remarks, message_url, message_time) values(
                                       null,
-                                      #{sessionId},
-                                      #{title},
-                                      #{remarks},
+                                      #{sessionMessageVO.sessionId},
+                                      #{sessionMessageVO.title},
+                                      #{sessionMessageVO.remarks},
                                       null,
                                       CURRENT_TIMESTAMP
                                   )

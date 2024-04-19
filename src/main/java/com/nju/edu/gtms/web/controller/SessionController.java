@@ -29,8 +29,7 @@ public class SessionController {
 
     @PostMapping("/submitSessionMessageVO")
     public Result submitSessionMessageVO(@RequestBody SessionMessageVO sessionMessageVO){
-        sessionService.submitSessionMessageVO(sessionMessageVO);
-        return Result.success();
+        return Result.success(sessionService.submitSessionMessageVO(sessionMessageVO));
     }
 
     @GetMapping("/getSessionByTeacherId")

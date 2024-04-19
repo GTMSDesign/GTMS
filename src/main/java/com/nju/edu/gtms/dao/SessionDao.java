@@ -13,10 +13,10 @@ import java.util.List;
 @Repository
 @Mapper
 public interface SessionDao {
-    void fileUpload(String session_id, String type, String url);
+    void fileUpload(String message_id, String type, String url);
     String fileDownload(String id, String type);
-    void submitSessionVO(SessionVO sessionVO,InsertedKeyHolder insertedKeyHolder);
-    void  submitSessionMessageVO(SessionMessageVO sessionMessageVO);
+    void submitSessionVO(SessionVO sessionVO, InsertedKeyHolder insertedKeyHolder);
+    void  submitSessionMessageVO(SessionMessageVO sessionMessageVO, InsertedKeyHolder insertedKeyHolder);
     List<SessionPO> getSessionByTeacherId(String teacherId);
     List<SessionMessagePO> getSessionMessage(String sessionId);
 }

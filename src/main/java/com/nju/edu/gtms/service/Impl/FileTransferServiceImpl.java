@@ -91,7 +91,7 @@ public class FileTransferServiceImpl implements FileTransferService {
                 case "resolution":
                     thesisDefenseDao.fileUpload(id, typeFormatted, url);
                     break;
-                case "session":
+                case "message":
                     sessionDao.fileUpload(id, typeFormatted, url);
                     break;
                 default:
@@ -120,7 +120,8 @@ public class FileTransferServiceImpl implements FileTransferService {
                     filePath = thesisDefenseDao.fileDownload(id, typeFormatted);
                     break;
                 case "session":
-                    filePath = sessionDao.fileDownload(id, typeFormatted);
+                    // 链接已直接传给前端
+                    // filePath = sessionDao.fileDownload(id, typeFormatted);
                     break;
                 default:
                     // Handle unknown type
