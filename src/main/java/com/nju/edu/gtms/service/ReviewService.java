@@ -14,6 +14,8 @@ public interface ReviewService {
 
     List<ReviewRuleVO> getReviewRules();
 
+    void updateReviewRule(List<ReviewRuleVO> list);
+
     void submitReview(ReviewResultVO resultVO);
 
     List<ReviewConclusionVO>getReviewConclusionByTeacherId(String teacherId);

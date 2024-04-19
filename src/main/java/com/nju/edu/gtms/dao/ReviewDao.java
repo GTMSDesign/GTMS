@@ -20,6 +20,9 @@ public interface ReviewDao {
 
     List<ReviewRuleVO> getRules();
 
+    void insertRule(ReviewRuleVO ruleVO);
+    void resetRule();
+
     void updateReview(ReviewPO reviewPO);
 
     List<ReviewConclusionVO> getReviewConclusion(String teacherId);

@@ -39,6 +39,14 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    public void updateReviewRule(List<ReviewRuleVO> list) {
+        reviewDao.resetRule();
+        for(ReviewRuleVO ruleVO:list){
+            reviewDao.insertRule(ruleVO);
+        }
+    }
+
+    @Override
     public void submitReview(ReviewResultVO resultVO) {
         ReviewPO reviewPO = reviewDao.getReviewByThesisId(resultVO.getThesisId());
         if (reviewPO==null){

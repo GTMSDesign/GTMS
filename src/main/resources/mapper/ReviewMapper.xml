@@ -25,6 +25,13 @@
     <select id="getRules" resultMap="ReviewRuleVO">
         select review_item,review_element,max_score from review_rules
     </select>
+    <delete id="resetRule">
+        TRUNCATE TABLE review_rules
+    </delete>
+    <insert id="insertRule" parameterType="com.nju.edu.gtms.model.vo.ReviewRuleVO">
+        INSERT INTO review_rules (review_item, review_element, max_score)
+        VALUES (#{reviewItem}, #{reviewElement}, #{maxScore})
+    </insert>
 
     <update id="updateReview" parameterType="com.nju.edu.gtms.model.po.ReviewPO">
         UPDATE reviews
