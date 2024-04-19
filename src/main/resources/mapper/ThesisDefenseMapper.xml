@@ -23,17 +23,17 @@
     <update id = "saveInformation" parameterType="com.nju.edu.gtms.model.po.ThesisDefensePO">
         update thesis_defense
         <set>
-            <if test="defense_id != null"> `defense_id`  = #{defenseId},</if>
+            <if test="thesisId != 0"> `thesis_id`  = #{thesisId},</if>
             <if test="secretary != null"> `secretary`  = #{secretary},</if>
-            <if test="teacher_1 != null"> `teacher_1`  = #{teacher1},</if>
-            <if test="teacher_2 != null"> `teacher_2`  = #{teacher2},</if>
-            <if test="teacher_3 != null"> `teacher_3`  = #{teacher3},</if>
+            <if test="teacher1 != null"> `teacher_1`  = #{teacher1},</if>
+            <if test="teacher2 != null"> `teacher_2`  = #{teacher2},</if>
+            <if test="teacher3 != null"> `teacher_3`  = #{teacher3},</if>
             <if test="conclusion != null"> `conclusion`  = #{conclusion},</if>
             <if test="resolution != null"> `resolution`  = #{resolution},</if>
-            <if test="defense_remarks != null"> `defense_remarks`  = #{defenseRemarks},</if>
-            <if test="defense_url != null"> `defense_url`  = #{defenseUrl},</if>
-            <if test="resolution_url != null"> `resolution_url`  = #{resolutionUrl},</if>
-            <if test="thesis_id != null"> `thesis_id`  = #{thesisId},</if>
+            <if test="defenseRemarks != null"> `defense_remarks`  = #{defenseRemarks},</if>
+            <if test="defenseUrl != null"> `defense_url`  = #{defenseUrl},</if>
+            <if test="resolutionUrl != null"> `resolution_url`  = #{resolutionUrl},</if>
+            <if test="thesisId != null"> `thesis_id`  = #{thesisId},</if>
             <if test="place != null"> `place`  = #{place},</if>
             <if test="review != null"> `review`  = #{review},</if>
             <if test="secretary != null"> `secretary`  = #{secretary},</if>
