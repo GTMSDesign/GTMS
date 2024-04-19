@@ -14,6 +14,14 @@ public interface AccountDao {
 
     AccountPO findByAccount(String account);
 
+    List<AccountPO> getAllAccount();
+
+    void updateByAccount(AccountPO accountPO);
+
+    void createAccount(AccountPO accountPO);
+
     List<AccountPO> getUnenteredStudents();
     List<AccountPO> getUnenteredTeachers();
+
+    void deleteByAccount(String account);
 }

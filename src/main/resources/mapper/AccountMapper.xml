@@ -2,6 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nju.edu.gtms.dao.AccountDao">
 
+    <select id="getAllAccount" resultMap="AccountPO">
+        select * from accounts
+    </select>
+    <update id="updateByAccount" parameterType="com.nju.edu.gtms.model.po.AccountPO">
+        update accounts set name=#{name},password=#{password},power=#{power} where account = #{account}
+    </update>
+    <delete id="deleteByAccount">
+        delete from accounts where account = #{account}
+    </delete>
+
+    <insert id="createAccount" parameterType="com.nju.edu.gtms.model.po.AccountPO">
+        insert into accounts value(#{account},#{password},#{name},#{power})
+    </insert>
+
     <select id="findByAccountAndPassword" resultMap="AccountPO">
         select * from accounts where account =#{account} and password =#{password}
     </select>

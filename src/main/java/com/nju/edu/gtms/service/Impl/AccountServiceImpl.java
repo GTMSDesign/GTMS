@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.PublicKey;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -49,6 +50,31 @@ public class AccountServiceImpl implements AccountService {
     public String getUsernameByUserId(String userId){
         AccountPO accountPO = accountDao.findByAccount(userId);
         return accountPO.getName();
+    }
+
+    @Override
+    public List<AccountPO> getAllAccount() {
+        return accountDao.getAllAccount();
+    }
+
+    @Override
+    public void updateByAccount(AccountPO accountPO) {
+        accountDao.updateByAccount(accountPO);
+    }
+
+    @Override
+    public String createAccount(AccountPO accountPO) {
+        if (accountDao.findByAccount(accountPO.getAccount()) != null){
+            return "创建失败！";
+        }else {
+            accountDao.createAccount(accountPO);
+            return "创建成功";
+        }
+    }
+
+    @Override
+    public void deleteByAccount(String account) {
+        accountDao.deleteByAccount(account);
     }
 
 }
