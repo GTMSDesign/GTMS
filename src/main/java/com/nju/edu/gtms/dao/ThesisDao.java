@@ -11,6 +11,8 @@ import java.util.List;
 public interface ThesisDao {
     List<ThesisPO> findThesisByTeacherId(String teacherId);
 
+    List<ThesisPO> findAllThesis();
+
     ThesisPO findOneByThesisId(String ThesisId);
 
     List<ThesisPO> findThesisByTeacherIdAndStatus(String teacherId,String status);

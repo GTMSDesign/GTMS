@@ -5,6 +5,7 @@ import com.nju.edu.gtms.model.po.TeacherPO;
 import com.nju.edu.gtms.model.vo.ReviewRuleVO;
 import com.nju.edu.gtms.service.RegistrarService;
 import com.nju.edu.gtms.service.ReviewService;
+import com.nju.edu.gtms.service.ThesisService;
 import com.nju.edu.gtms.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +17,13 @@ import java.util.List;
 public class RegistrarController {
     RegistrarService registrarService;
     ReviewService reviewService;
+
+    ThesisService thesisService;
     @Autowired
-    public RegistrarController(RegistrarService registrarService,ReviewService reviewService){
+    public RegistrarController(RegistrarService registrarService,ReviewService reviewService,ThesisService thesisService){
         this.reviewService = reviewService;
         this.registrarService = registrarService;
+        this.thesisService = thesisService;
     }
 
     @GetMapping("/getUnenteredStudents")
@@ -48,4 +52,10 @@ public class RegistrarController {
         reviewService.updateReviewRule(list);
         return Result.success();
     }
+
+    @GetMapping("/getAllThesis")
+    public Result getAllThesis(){
+        return Result.success(thesisService.getAllThesis());
+    }
+
 }

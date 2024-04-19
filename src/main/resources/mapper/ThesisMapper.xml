@@ -14,6 +14,10 @@
         select * from thesis where thesis_id=#{ThesisId}
     </select>
 
+    <select id="findAllThesis" resultMap="ThesisPO">
+        select * from thesis;
+    </select>
+
     <update id="setThesisStatue" timeout="10">
         update thesis set status = #{status} where thesis_id=#{thesisId}
     </update>
