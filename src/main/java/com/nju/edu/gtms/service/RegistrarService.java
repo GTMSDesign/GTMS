@@ -4,6 +4,7 @@ import com.nju.edu.gtms.model.po.AccountPO;
 import com.nju.edu.gtms.model.po.StudentPO;
 import com.nju.edu.gtms.model.po.TeacherPO;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface RegistrarService {
     void submitStudentPO(StudentPO studentPO);
 
     void submitTeacherPO(TeacherPO teacherPO);
+
+    void submitPlagiarismCheck(String studentId, String thesisId, String repetition, String conclusion);
 }

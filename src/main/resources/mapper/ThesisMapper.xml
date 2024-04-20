@@ -18,6 +18,10 @@
         select * from thesis;
     </select>
 
+    <select id="getThesisByStatus" resultMap="ThesisPO">
+        select * from thesis where status = #{status}
+    </select>
+
     <update id="setThesisStatue" timeout="10">
         update thesis set status = #{status} where thesis_id=#{thesisId}
     </update>
@@ -40,6 +44,10 @@
         select ${type} FROM thesis WHERE thesis_id = #{id}
     </select>
 
+    <insert id="addPlagiarismCheck" parameterType="com.nju.edu.gtms.model.po.PlagiarismCheckPO">
+        INSERT INTO plagiarism_check ( thesis_id, repetition, conclusion,date)
+        VALUES (#{thesisId}, #{repetition}, #{conclusion},#{date})
+    </insert>
 
     <!-- 结果映射配置 -->
     <resultMap id="ThesisPO" type="com.nju.edu.gtms.model.po.ThesisPO">

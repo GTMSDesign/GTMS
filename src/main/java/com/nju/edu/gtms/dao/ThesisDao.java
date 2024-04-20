@@ -1,9 +1,11 @@
 package com.nju.edu.gtms.dao;
 
+import com.nju.edu.gtms.model.po.PlagiarismCheckPO;
 import com.nju.edu.gtms.model.po.ThesisPO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -12,6 +14,8 @@ public interface ThesisDao {
     List<ThesisPO> findThesisByTeacherId(String teacherId);
 
     List<ThesisPO> findAllThesis();
+
+    List<ThesisPO> getThesisByStatus(String status);
 
     ThesisPO findOneByThesisId(String ThesisId);
 
@@ -24,4 +28,6 @@ public interface ThesisDao {
     void fileUpload(String thesis_id, String type, String url);
 
     String fileDownload(String id, String type);
+
+    void addPlagiarismCheck(PlagiarismCheckPO po);
 }

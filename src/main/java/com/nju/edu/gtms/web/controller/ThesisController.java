@@ -32,4 +32,11 @@ public class ThesisController {
     public Result getThesisByThesisId(@RequestParam("thesis_id") String thesisId){
         return Result.success(thesisService.getThesisByThesisId(thesisId));
     }
+
+    @GetMapping("/getThesisByStatus")
+    public Result getThesisByStatus(@RequestParam String status){
+        return Result.success(thesisService.getThesisByStatus(status));
+    }
+
+
 }

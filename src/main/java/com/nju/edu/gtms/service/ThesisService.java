@@ -14,4 +14,6 @@ public interface ThesisService{
     ThesisPO getThesisByThesisId(String thesisId);
 
     List<ThesisPO> getAllThesis();
+
+    List<ThesisPO> getThesisByStatus(String status);
 }

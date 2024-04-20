@@ -57,5 +57,10 @@ public class RegistrarController {
     public Result getAllThesis(){
         return Result.success(thesisService.getAllThesis());
     }
+    @PostMapping("/submitPlagiarismCheck")
+    public Result submitPlagiarismCheck(@RequestParam String studentId,@RequestParam String thesisId,@RequestParam String repetition,@RequestParam String conclusion){
+        registrarService.submitPlagiarismCheck(studentId,thesisId,repetition,conclusion);
+        return Result.success();
+    }
 
 }

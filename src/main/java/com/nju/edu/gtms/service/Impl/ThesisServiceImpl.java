@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class ThesisServiceImpl implements ThesisService {
-    private ThesisDao thesisDao;
+    private final ThesisDao thesisDao;
 
     @Autowired
     public ThesisServiceImpl(ThesisDao thesisDao){this.thesisDao=thesisDao;}
@@ -33,6 +33,11 @@ public class ThesisServiceImpl implements ThesisService {
     @Override
     public List<ThesisPO> getAllThesis() {
         return thesisDao.findAllThesis();
+    }
+
+    @Override
+    public List<ThesisPO> getThesisByStatus(String status) {
+        return thesisDao.getThesisByStatus(status);
     }
 }
 
