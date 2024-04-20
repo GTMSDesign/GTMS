@@ -18,5 +18,6 @@ public interface SessionDao {
     void submitSessionVO(SessionVO sessionVO, InsertedKeyHolder insertedKeyHolder);
     void  submitSessionMessageVO(SessionMessageVO sessionMessageVO, InsertedKeyHolder insertedKeyHolder);
     List<SessionPO> getSessionByTeacherId(String teacherId);
+    List<SessionPO> getSessionByStudentId(String studentId);
     List<SessionMessagePO> getSessionMessage(String sessionId);
 }

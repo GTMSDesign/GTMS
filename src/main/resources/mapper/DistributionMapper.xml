@@ -6,6 +6,10 @@
         select student_id from distribution where teacher_id = #{teacherId}
     </select>
 
+    <select id="getTeacherIdByStudentId" resultType="String">
+        select teacher_id from distribution where student_id = #{studentId}
+    </select>
+
     <!-- 结果映射配置 -->
     <resultMap id="AccountPO" type="com.nju.edu.gtms.model.po.AccountPO">
         <id column="account" property="account" />

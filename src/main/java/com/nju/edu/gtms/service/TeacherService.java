@@ -22,4 +22,5 @@ public interface TeacherService {
     void approveDeffer(String thesisId);
 
     void defenseResolution(String thesisId);
+    String getTeacherNameById(String teacherId);
 }

@@ -24,6 +24,10 @@
                                    )
     </insert>
 
+    <select id="getTeacherNameById" resultType="String">
+        select teacher_name from teachers where teacher_id =#{teacherId}
+    </select>
+
     <!-- 结果映射配置 -->
     <resultMap id="TeacherPO" type="com.nju.edu.gtms.model.po.TeacherPO">
         <id column="teacher_id" property="teacherId" />

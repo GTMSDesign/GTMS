@@ -37,6 +37,11 @@ public class SessionController {
         return Result.success(sessionService.getSessionByTeacherId(teacherId));
     }
 
+    @GetMapping("/getSessionByStudentId")
+    public Result getSessionByStudentId(@RequestParam("studentId") String studentId){
+        return Result.success(sessionService.getSessionByStudentId(studentId));
+    }
+
     @GetMapping("/getSessionMessage")
     public Result getSessionMessage(@RequestParam("sessionId") String sessionId){
         return Result.success(sessionService.getSessionMessage(sessionId));

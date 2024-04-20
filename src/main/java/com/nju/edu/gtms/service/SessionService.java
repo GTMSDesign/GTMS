@@ -11,9 +11,8 @@ import java.util.List;
 @Service
 public interface SessionService {
     String submitSessionVO(SessionVO sessionVO);
-
     String submitSessionMessageVO(SessionMessageVO sessionMessageVO);
-
     List<SessionPO> getSessionByTeacherId(String teacherId);
+    List<SessionPO> getSessionByStudentId(String studentId);
     List<SessionMessagePO> getSessionMessage(String sessionId);
 }

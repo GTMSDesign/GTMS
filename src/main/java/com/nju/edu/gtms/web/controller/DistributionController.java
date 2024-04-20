@@ -21,4 +21,9 @@ public class DistributionController {
     public Result getStudentByTeacherId(@RequestParam("teacherId") String teacherId){
         return Result.success(distributionService.getStudentByTeacherId(teacherId));
     }
+
+    @GetMapping("/getTeacherByStudentId")
+    public Result getTeacherByStudentId(@RequestParam("studentId") String studentId){
+        return Result.success(distributionService.getTeacherByStudentId(studentId));
+    }
 }

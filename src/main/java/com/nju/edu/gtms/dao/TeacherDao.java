@@ -15,4 +15,5 @@ public interface TeacherDao {
     void updateEmailByTeacherId(String email,String teacherId);
 
     void insertTeacherPO(TeacherPO teacherPO);
+    String getTeacherNameById(String teacherId);
 }

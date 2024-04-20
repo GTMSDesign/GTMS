@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface DistributionDao {
     String[] getStudentIdByTeacherId(String teacherId);
+    String[] getTeacherIdByStudentId(String studentId);
 }

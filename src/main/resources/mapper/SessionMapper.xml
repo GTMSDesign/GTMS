@@ -39,6 +39,10 @@
         select * from session where teacher_id = #{teacherId}
     </select>
 
+    <select id="getSessionByStudentId" resultMap="SessionPO">
+        select * from session where student_id = #{studentId}
+    </select>
+
     <select id="getSessionMessage" resultMap="SessionMessagePO">
         select * from session_message where session_id = #{sessionId}
     </select>

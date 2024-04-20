@@ -65,4 +65,9 @@ public class TeacherController {
         teacherService.updateEmailByTeacherId(email,teacherId);
         return Result.success();
     }
+
+    @GetMapping("/getTeacherNameById")
+    public Result getTeacherNameById(@RequestParam("teacherId") String teacherId){
+        return Result.success(teacherService.getTeacherNameById(teacherId));
+    }
 }

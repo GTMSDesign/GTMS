@@ -48,6 +48,11 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
+    public List<SessionPO> getSessionByStudentId(String studentId) {
+        return sessionDao.getSessionByStudentId(studentId);
+    }
+
+    @Override
     public List<SessionMessagePO> getSessionMessage(String sessionId) {
         return sessionDao.getSessionMessage(sessionId);
     }

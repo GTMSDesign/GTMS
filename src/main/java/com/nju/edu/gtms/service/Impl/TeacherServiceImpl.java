@@ -75,8 +75,6 @@ public class TeacherServiceImpl implements TeacherService {
         }
         thesisDao.setThesisStatue("答辩后定稿",thesisId);
     }
-
-
     @Override
     public void updatePhoneByTeacherId(String phone,String teacherId){
         teacherDao.updatePhoneByTeacherId(phone,teacherId);
@@ -85,4 +83,9 @@ public class TeacherServiceImpl implements TeacherService {
     public void updateEmailByTeacherId(String email,String teacherId){
         teacherDao.updateEmailByTeacherId(email,teacherId);
     }
+    @Override
+    public String getTeacherNameById(String teacherId) {
+        return teacherDao.getTeacherNameById(teacherId);
+    }
+
 }
