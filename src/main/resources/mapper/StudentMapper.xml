@@ -31,6 +31,14 @@
         select student_name from students where student_id =#{studentId}
     </select>
 
+    <select id="getAllStudent" resultMap="StudentPO">
+        select * from students
+    </select>
+
+    <update id="updateDistribution">
+        update students set distribute=#{distribute} where student_id =#{studentId}
+    </update>
+
     <resultMap id="StudentPO" type="com.nju.edu.gtms.model.po.StudentPO">
         <id column="student_id" property="studentId" />
         <result column="student_name" property="studentName" />

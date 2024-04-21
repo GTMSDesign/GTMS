@@ -21,4 +21,7 @@ public interface TeacherDao {
     List<TeacherPO> getInternalTeachers();
 
     List<TeacherPO> getExternalTeachers();
+
+    List<TeacherPO> getAllTeacher();
+
 }

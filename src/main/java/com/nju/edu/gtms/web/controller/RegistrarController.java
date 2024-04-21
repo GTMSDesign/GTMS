@@ -65,6 +65,26 @@ public class RegistrarController {
         return Result.success();
     }
 
+    @GetMapping("/getAllTeacher")
+    public Result getAllTeacher(){
+        return Result.success(registrarService.getAllTeacher());
+    }
+
+    @GetMapping("/getAllStudent")
+    public Result getAllStudent(){
+        return Result.success(registrarService.getAllStudent());
+    }
+
+    @PostMapping("/submitAssignment")
+    public Result submitAssignment(@RequestParam String studentId,@RequestParam String teacherId){
+        registrarService.submitAssignment(studentId,teacherId);
+        return Result.success();
+    }
+    @PostMapping("/deleteAssignment")
+    public Result deleteAssignment(@RequestParam String studentId,@RequestParam String teacherId){
+        registrarService.deleteAssignment(studentId,teacherId);
+        return Result.success();
+    }
     @GetMapping("/getInternalTeachers")
     public Result getInternalTeachers(){
         return Result.success(registrarService.getInternalTeachers());

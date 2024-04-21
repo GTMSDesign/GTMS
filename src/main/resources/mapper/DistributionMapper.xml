@@ -10,6 +10,14 @@
         select teacher_id from distribution where student_id = #{studentId}
     </select>
 
+    <insert id="submitAssignment">
+        insert into distribution value(#{teacherId}, #{studentId})
+    </insert>
+
+    <delete id="deleteAssignment">
+        delete from distribution where student_id=#{studentId} and teacher_id = #{teacherId}
+    </delete>
+
     <!-- 结果映射配置 -->
     <resultMap id="AccountPO" type="com.nju.edu.gtms.model.po.AccountPO">
         <id column="account" property="account" />

@@ -27,4 +27,12 @@ public interface RegistrarService {
     List<TeacherPO> getExternalTeachers();
 
 
+
+    List<TeacherPO> getAllTeacher();
+
+    List<StudentPO> getAllStudent();
+
+    void submitAssignment(String studentId, String teacherId);
+
+    void deleteAssignment(String studentId, String teacherId);
 }

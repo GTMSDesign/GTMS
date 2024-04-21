@@ -1,9 +1,6 @@
 package com.nju.edu.gtms.service.Impl;
 
-import com.nju.edu.gtms.dao.AccountDao;
-import com.nju.edu.gtms.dao.StudentDao;
-import com.nju.edu.gtms.dao.TeacherDao;
-import com.nju.edu.gtms.dao.ThesisDao;
+import com.nju.edu.gtms.dao.*;
 import com.nju.edu.gtms.model.po.AccountPO;
 import com.nju.edu.gtms.model.po.PlagiarismCheckPO;
 import com.nju.edu.gtms.model.po.StudentPO;
@@ -27,13 +24,16 @@ public class RegistrarServiceImpl implements RegistrarService {
     private final EmailService emailService;
 
     private final ThesisDao thesisDao;
+
+    private final DistributionDao distributionDao;
     @Autowired
-    public RegistrarServiceImpl(AccountDao accountDao,StudentDao studentDao,TeacherDao teacherDao,EmailService emailService,ThesisDao thesisDao){
+    public RegistrarServiceImpl(AccountDao accountDao, StudentDao studentDao, TeacherDao teacherDao, EmailService emailService, ThesisDao thesisDao, DistributionDao distributionDao){
         this.accountDao = accountDao;
         this.studentDao = studentDao;
         this.teacherDao = teacherDao;
         this.emailService = emailService;
         this.thesisDao = thesisDao;
+        this.distributionDao = distributionDao;
     }
 
 
@@ -93,6 +93,30 @@ public class RegistrarServiceImpl implements RegistrarService {
     @Override
     public List<TeacherPO> getExternalTeachers() {
         return teacherDao.getExternalTeachers();
+    }
+
+
+
+    @Override
+    public List<TeacherPO> getAllTeacher() {
+        return teacherDao.getAllTeacher();
+    }
+
+    @Override
+    public List<StudentPO> getAllStudent() {
+        return studentDao.getAllStudent();
+    }
+
+    @Override
+    public void submitAssignment(String studentId, String teacherId) {
+        studentDao.updateDistribution(studentId,"是");
+        distributionDao.submitAssignment(studentId,teacherId);
+    }
+
+    @Override
+    public void deleteAssignment(String studentId, String teacherId) {
+        studentDao.updateDistribution(studentId,"否");
+        distributionDao.deleteAssignment(studentId,teacherId);
     }
 
 
