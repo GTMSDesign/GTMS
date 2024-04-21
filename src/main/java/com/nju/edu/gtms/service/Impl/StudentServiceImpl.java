@@ -27,4 +27,9 @@ public class StudentServiceImpl implements StudentService {
     public String getStudentNameById(String studentId) {
         return studentDao.getStudentNameById(studentId);
     }
+
+    @Override
+    public void finishDraft(String thesisId) {
+        studentDao.finishDraft(thesisId);
+    }
 }

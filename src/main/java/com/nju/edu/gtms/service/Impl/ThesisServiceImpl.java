@@ -21,6 +21,11 @@ public class ThesisServiceImpl implements ThesisService {
     }
 
     @Override
+    public List<ThesisPO> getThesisByStudentId(String studentId){
+        return thesisDao.findThesisByStudentId(studentId);
+    }
+
+    @Override
     public List<ThesisPO> getThesisByTeacherIdAndStatus(String teacherId, String status) {
         return thesisDao.findThesisByTeacherIdAndStatus(teacherId,status);
     }

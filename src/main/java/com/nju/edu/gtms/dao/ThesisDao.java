@@ -13,6 +13,8 @@ import java.util.List;
 public interface ThesisDao {
     List<ThesisPO> findThesisByTeacherId(String teacherId);
 
+    List<ThesisPO> findThesisByStudentId(String studentId);
+
     List<ThesisPO> findAllThesis();
 
     List<ThesisPO> getThesisByStatus(String status);

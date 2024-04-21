@@ -6,6 +6,10 @@
         select * from thesis where teacher_id=#{teacherId}
     </select>
 
+    <select id="findThesisByStudentId" resultMap="ThesisPO">
+        select * from thesis where student_id=#{studentId}
+    </select>
+
     <select id="findThesisByTeacherIdAndStatus" resultMap="ThesisPO">
         select * from thesis where teacher_id=#{teacherId} and status=#{status}
     </select>

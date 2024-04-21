@@ -29,4 +29,10 @@ public class StudentController {
     public Result getStudentNameById(@RequestParam("studentId") String studentId){
         return Result.success(studentService.getStudentNameById(studentId));
     }
+
+    @GetMapping("/finishDraft")
+    public Result finishDraft(@RequestParam("thesisId") String thesisId){
+        studentService.finishDraft(thesisId);
+        return Result.success();
+    }
 }

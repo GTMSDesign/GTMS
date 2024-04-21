@@ -39,6 +39,9 @@
         update students set distribute=#{distribute} where student_id =#{studentId}
     </update>
 
+    <update id="finishDraft">
+        update thesis set status="完成初稿" where thesis_id =#{thesisId}
+    </update>
     <resultMap id="StudentPO" type="com.nju.edu.gtms.model.po.StudentPO">
         <id column="student_id" property="studentId" />
         <result column="student_name" property="studentName" />

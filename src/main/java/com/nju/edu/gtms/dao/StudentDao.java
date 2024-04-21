@@ -16,4 +16,5 @@ public interface StudentDao {
     List<StudentPO> getAllStudent();
 
     void updateDistribution(String studentId,String distribute);
+    void finishDraft(String thesisId);
 }
