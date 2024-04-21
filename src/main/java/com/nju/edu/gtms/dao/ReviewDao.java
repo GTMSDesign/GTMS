@@ -26,4 +26,8 @@ public interface ReviewDao {
     void updateReview(ReviewPO reviewPO);
 
     List<ReviewConclusionVO> getReviewConclusion(String teacherId);
+
+    void deleteReviewByThesisId(String thesisId);
+
+    void insertReview(ReviewPO reviewPO);
 }

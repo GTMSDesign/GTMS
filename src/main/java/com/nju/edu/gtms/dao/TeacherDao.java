@@ -5,6 +5,8 @@ import com.nju.edu.gtms.model.po.TeacherPO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface TeacherDao {
@@ -16,4 +18,7 @@ public interface TeacherDao {
 
     void insertTeacherPO(TeacherPO teacherPO);
     String getTeacherNameById(String teacherId);
+    List<TeacherPO> getInternalTeachers();
+
+    List<TeacherPO> getExternalTeachers();
 }

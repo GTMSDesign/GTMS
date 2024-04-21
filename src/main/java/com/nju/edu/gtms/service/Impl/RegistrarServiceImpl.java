@@ -84,4 +84,16 @@ public class RegistrarServiceImpl implements RegistrarService {
                 .build();
         thesisDao.addPlagiarismCheck(plagiarismCheckPO);
     }
+
+    @Override
+    public List<TeacherPO> getInternalTeachers() {
+        return teacherDao.getInternalTeachers();
+    }
+
+    @Override
+    public List<TeacherPO> getExternalTeachers() {
+        return teacherDao.getExternalTeachers();
+    }
+
+
 }

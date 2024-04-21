@@ -1,13 +1,18 @@
 package com.nju.edu.gtms.service.Impl;
 
 import com.nju.edu.gtms.dao.ReviewDao;
+import com.nju.edu.gtms.dao.TeacherDao;
 import com.nju.edu.gtms.dao.ThesisDao;
 import com.nju.edu.gtms.model.po.ReviewPO;
+import com.nju.edu.gtms.model.po.TeacherPO;
+import com.nju.edu.gtms.model.po.ThesisPO;
 import com.nju.edu.gtms.model.vo.*;
+import com.nju.edu.gtms.service.EmailService;
 import com.nju.edu.gtms.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -17,10 +22,16 @@ public class ReviewServiceImpl implements ReviewService {
 
     private final ThesisDao thesisDao;
 
+    private final EmailService emailService;
+
+    private final TeacherDao teacherDao;
+
     @Autowired
-    public ReviewServiceImpl(ReviewDao reviewDao,ThesisDao thesisDao){
+    public ReviewServiceImpl(ReviewDao reviewDao,ThesisDao thesisDao,EmailService emailService,TeacherDao teacherDao){
         this.thesisDao = thesisDao;
         this.reviewDao = reviewDao;
+        this.emailService = emailService;
+        this.teacherDao = teacherDao;
     }
 
     @Override
@@ -81,5 +92,29 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<ReviewConclusionVO> getReviewConclusionByTeacherId(String teacherId) {
         return reviewDao.getReviewConclusion(teacherId);
+    }
+
+    @Override
+    public void assignReview(String thesisId, String internalId, String externalId, Date deadline) {
+        reviewDao.deleteReviewByThesisId(thesisId);
+        ReviewPO reviewPO = ReviewPO.builder()
+                .thesisId(thesisId)
+                .internalTeacherId(internalId)
+                .externalTeacherId(externalId)
+                .date(deadline)
+                .externalScore(-1)
+                .internalScore(-1)
+                .build();
+        reviewDao.insertReview(reviewPO);
+        thesisDao.setThesisStatue("待评审",thesisId);
+        ThesisPO thesisPO = thesisDao.findOneByThesisId(thesisId);
+        TeacherPO teacherPO = teacherDao.findOneById(internalId);
+        String subject = "评审：" + thesisPO.getStudentName() + "_" + thesisPO.getTitle();
+        String body1 = "尊敬的"+ teacherPO.getTeacherName()+"老师，您好！请您评审论文，并在截止时间之前提交评审意见。评审链接为http://localhost:5173/reviewManagement。";
+        teacherPO = teacherDao.findOneById(externalId);
+        String body2 = "尊敬的"+ teacherPO.getTeacherName()+"老师，您好！请您评审论文，并在截止时间之前提交评审意见。评审链接为http://localhost:5173/reviewManagement。";
+
+        emailService.send(internalId,subject,body1);
+        emailService.send(externalId,subject,body2);
     }
 }

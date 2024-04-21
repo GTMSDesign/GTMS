@@ -11,6 +11,12 @@
     <update id="updateEmailByTeacherId">
         update teachers set email=#{email} where teacher_id =#{teacherId}
     </update>
+    <select id="getInternalTeachers" resultMap="TeacherPO">
+        select * from teachers where category='校内'
+    </select>
+    <select id="getExternalTeachers" resultMap="TeacherPO">
+        select * from teachers where category='校外'
+    </select>
     <insert id="insertTeacherPO" parameterType="com.nju.edu.gtms.model.po.TeacherPO">
         insert into teachers values(
                                        #{teacherId},

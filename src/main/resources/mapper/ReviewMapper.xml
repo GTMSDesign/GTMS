@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nju.edu.gtms.dao.ReviewDao">
-
+    <insert id="insertReview" parameterType="com.nju.edu.gtms.model.po.ReviewPO">
+        INSERT INTO reviews (
+            thesis_id,
+            internal_teacher_id,
+            internal_score,
+            external_teacher_id,
+            external_score,
+            date
+        ) VALUES (
+                     #{thesisId},
+                     #{internalTeacherId},
+                     #{internalScore},
+                     #{externalTeacherId},
+                     #{externalScore},
+                     #{date}
+                 )
+    </insert>
+    <delete id="deleteReviewByThesisId" >
+        DELETE FROM reviews
+        WHERE thesis_id = #{thesisId}
+    </delete>
     <select id="getThesisByReviewerId" resultMap="ReviewVO">
         SELECT
             t.title,
@@ -19,7 +39,7 @@
             students s ON t.student_id = s.student_id
         WHERE
             (r.internal_teacher_id = #{teacherId} AND r.internal_score = -1)
-           OR (r.external_teacher_id = #{teacherId} AND r.internal_score = -1);
+           OR (r.external_teacher_id = #{teacherId} AND r.external_score = -1);
 
     </select>
     <select id="getRules" resultMap="ReviewRuleVO">

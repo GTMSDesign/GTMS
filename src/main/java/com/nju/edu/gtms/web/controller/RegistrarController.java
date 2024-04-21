@@ -8,8 +8,10 @@ import com.nju.edu.gtms.service.ReviewService;
 import com.nju.edu.gtms.service.ThesisService;
 import com.nju.edu.gtms.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -63,4 +65,21 @@ public class RegistrarController {
         return Result.success();
     }
 
+    @GetMapping("/getInternalTeachers")
+    public Result getInternalTeachers(){
+        return Result.success(registrarService.getInternalTeachers());
+    }
+
+    @GetMapping("/getExternalTeachers")
+    public Result getExternalTeachers(){
+        return Result.success(registrarService.getExternalTeachers());
+    }
+
+    @PostMapping("/assignReview")
+    public Result assignReview(@RequestParam String[] thesisId,@RequestParam String internalId,@RequestParam String externalId,@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline){
+        for(String thesis:thesisId){
+            reviewService.assignReview(thesis,internalId,externalId,deadline);
+        }
+        return Result.success();
+    }
 }
