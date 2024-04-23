@@ -14,12 +14,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+
 import org.springframework.http.HttpHeaders;
 
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,6 +34,7 @@ public class FileTransferServiceImpl implements FileTransferService {
     private static final String ak = "LRJMKGBXMMTHZVAQHDZU";
     private static final String sk = "JboaeRrJMOOF0Hf6bwxjLs2nke1obvZjZty04dUn";
     public static String BUCKET_NAME = "marweey";//你创建的桶名
+    public static String BASE_URL = "https://marweey.obs.cn-east-3.myhuaweicloud.com/";
 
     public void ObsUpload(String bucketName, String key, InputStream inputStream) throws IOException {
         // 创建ObsClient实例
@@ -73,11 +72,10 @@ public class FileTransferServiceImpl implements FileTransferService {
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
             InputStream inputStream = file.getInputStream();
-            System.out.println(folderPath + "/" + newFilename);
             ObsUpload(BUCKET_NAME, folderPath + "/" + newFilename, inputStream);
 
             //保存url到thesis库
-            String url = "https://marweey.obs.cn-east-3.myhuaweicloud.com/" + folderPath + "/" + newFilename;
+            String url = BASE_URL + folderPath + "/" + newFilename;
             String typeFormatted = type + "_url";
             switch (type) {
                 case "opinion":
@@ -101,6 +99,18 @@ public class FileTransferServiceImpl implements FileTransferService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String uploadForEvaluation(String thesisId, String newFilename, String folderPath){
+        try {
+            FileInputStream inputStream = new FileInputStream(folderPath + "/" + newFilename);
+            ObsUpload(BUCKET_NAME, folderPath + "/" + newFilename, inputStream);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return BASE_URL + folderPath + "/" + newFilename;
     }
 
     @Override

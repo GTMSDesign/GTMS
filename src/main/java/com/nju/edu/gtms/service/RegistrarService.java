@@ -26,8 +26,6 @@ public interface RegistrarService {
 
     List<TeacherPO> getExternalTeachers();
 
-
-
     List<TeacherPO> getAllTeacher();
 
     List<StudentPO> getAllStudent();
@@ -35,4 +33,6 @@ public interface RegistrarService {
     void submitAssignment(String studentId, String teacherId);
 
     void deleteAssignment(String studentId, String teacherId);
+
+    String generateEvaluation(String thesisId, String studentId);
 }

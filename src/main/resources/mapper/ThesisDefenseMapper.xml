@@ -45,6 +45,14 @@
         select * from thesis_defense where secretary=#{teacherId}
     </select>
 
+    <select id="findLatestDefenseTimeByThesisId" resultType="Date">
+        select date from thesis_defense where thesis_id=#{thesisId} ORDER BY date DESC LIMIT 1
+    </select>
+
+    <select id="findReviewByThesisId" resultType="String">
+        select review from thesis_defense where thesis_id=#{thesisId} ORDER BY date DESC LIMIT 1
+    </select>
+
 <!--    <insert id = "saveInformation" parameterType="thesisDefensePO">-->
 <!--        insert into thesis_defense-->
 <!--        (`defense_id`,`thesis_id`, `secretary`, `teacher_1`, `teacher_2`, `teacher_3`,-->

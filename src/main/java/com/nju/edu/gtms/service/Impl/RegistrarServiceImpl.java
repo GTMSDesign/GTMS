@@ -1,15 +1,21 @@
 package com.nju.edu.gtms.service.Impl;
 
+import com.alibaba.excel.EasyExcelFactory;
+import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.metadata.Sheet;
+import com.alibaba.excel.metadata.Table;
 import com.nju.edu.gtms.dao.*;
-import com.nju.edu.gtms.model.po.AccountPO;
-import com.nju.edu.gtms.model.po.PlagiarismCheckPO;
-import com.nju.edu.gtms.model.po.StudentPO;
-import com.nju.edu.gtms.model.po.TeacherPO;
+import com.nju.edu.gtms.model.po.*;
 import com.nju.edu.gtms.service.EmailService;
+import com.nju.edu.gtms.service.FileTransferService;
 import com.nju.edu.gtms.service.RegistrarService;
+import com.nju.edu.gtms.util.WriteModel;
+import org.burningwave.core.assembler.StaticComponentContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,14 +32,20 @@ public class RegistrarServiceImpl implements RegistrarService {
     private final ThesisDao thesisDao;
 
     private final DistributionDao distributionDao;
+
+    private final ThesisDefenseDao thesisDefenseDao;
+
+    private final FileTransferService fileTransferService;
     @Autowired
-    public RegistrarServiceImpl(AccountDao accountDao, StudentDao studentDao, TeacherDao teacherDao, EmailService emailService, ThesisDao thesisDao, DistributionDao distributionDao){
+    public RegistrarServiceImpl(AccountDao accountDao, StudentDao studentDao, TeacherDao teacherDao, EmailService emailService, ThesisDao thesisDao, DistributionDao distributionDao, ThesisDefenseDao thesisDefenseDao, FileTransferService fileTransferService){
         this.accountDao = accountDao;
         this.studentDao = studentDao;
         this.teacherDao = teacherDao;
         this.emailService = emailService;
         this.thesisDao = thesisDao;
         this.distributionDao = distributionDao;
+        this.thesisDefenseDao = thesisDefenseDao;
+        this.fileTransferService = fileTransferService;
     }
 
 
@@ -119,5 +131,84 @@ public class RegistrarServiceImpl implements RegistrarService {
         distributionDao.deleteAssignment(studentId,teacherId);
     }
 
+    @Override
+    public String generateEvaluation(String thesisId, String studentId) {
+        StaticComponentContainer.Modules.exportAllToAll();
 
+        List<WriteModel> createModelList = createModelList(thesisId, studentId);
+
+
+        String rootFolderPath = "fileStore"; // 根文件夹路径
+        String type = "review";
+        String extension = ".xlsx";
+        String folderPath = rootFolderPath + "/" + type; // 构建文件夹路径
+        File folder = new File(folderPath); // 创建文件夹对象
+        if (!folder.exists()) {
+            folder.mkdirs(); // 创建文件夹及其父文件夹
+        }
+        String newFilename = thesisId + "_" + type + extension;
+
+        try {
+            // 文件输出位置
+            OutputStream out = new FileOutputStream(folderPath + "/" + newFilename);
+
+            ExcelWriter writer = EasyExcelFactory.getWriter(out);
+
+            // 写仅有一个 Sheet 的 Excel 文件, 此场景较为通用
+            Sheet sheet1 = new Sheet(1, 0, WriteModel.class);
+
+            // 第一个 sheet 名称
+            sheet1.setSheetName("三个一评价");
+
+            // 写数据到 Writer 上下文中
+            // 入参1: 创建要写入的模型数据
+            // 入参2: 要写入的目标 sheet
+            writer.write(createModelList, sheet1);
+
+            // 将上下文中的最终 outputStream 写入到指定文件中
+            writer.finish();
+
+            // 关闭流
+            out.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+    }
+        return fileTransferService.uploadForEvaluation(thesisId, newFilename, folderPath);
+    }
+
+    private List<WriteModel> createModelList(String thesisId, String studentId) {
+
+        ThesisPO thesisInfo = thesisDao.findOneByThesisId(thesisId);
+        StudentPO studentInfo = studentDao.findOneById(studentId);
+
+        String teacherName = thesisInfo.getTeacherName();
+        String studentName = thesisInfo.getStudentName();
+        String degree = "硕士";
+        String title = thesisInfo.getTitle();
+        int excellentCourses = studentInfo.getExcellentCourses();
+        int goodCourses = studentInfo.getGoodCourses();
+        int fairCourses = studentInfo.getFairCourses();
+        int passCourses = studentInfo.getPassCourses();
+        String review = thesisDefenseDao.findReviewByThesisId(thesisId);
+        String verification = "";
+        Date defenseDate = thesisDefenseDao.findLatestDefenseTimeByThesisId(thesisId);
+
+        List<WriteModel> writeModels = new ArrayList<>();
+            WriteModel writeModel = WriteModel.builder()
+                    .thesisId(thesisId)
+                    .teacherName(teacherName)
+                    .studentName(studentName)
+                    .degree(degree)
+                    .title(title)
+                    .excellentCourses(excellentCourses)
+                    .goodCourses(goodCourses)
+                    .fairCourses(fairCourses)
+                    .passCourses(passCourses)
+                    .review(review)
+                    .verification(verification)
+                    .date(defenseDate)
+                    .build();
+            writeModels.add(writeModel);
+            return writeModels;
+    }
 }

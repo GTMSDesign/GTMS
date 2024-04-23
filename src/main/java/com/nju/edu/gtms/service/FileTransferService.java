@@ -10,4 +10,6 @@ public interface FileTransferService {
     void fileUpload(MultipartFile file, FileTransferVO fileTransferVO);
 
     String fileDownload(String id, String type);
+
+    String uploadForEvaluation(String thesisId, String newFilename, String folderPath);
 }

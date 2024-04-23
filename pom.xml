@@ -75,6 +75,17 @@
             <artifactId>esdk-obs-java</artifactId>
             <version>3.23.9</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>1.1.2-beta5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.burningwave</groupId>
+            <artifactId>core</artifactId>
+            <version>9.5.2</version>
+        </dependency>
+
 
     </dependencies>
 

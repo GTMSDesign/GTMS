@@ -3,6 +3,7 @@ package com.nju.edu.gtms.web.controller;
 import com.nju.edu.gtms.model.po.StudentPO;
 import com.nju.edu.gtms.model.po.TeacherPO;
 import com.nju.edu.gtms.model.vo.ReviewRuleVO;
+import com.nju.edu.gtms.model.vo.SessionVO;
 import com.nju.edu.gtms.service.RegistrarService;
 import com.nju.edu.gtms.service.ReviewService;
 import com.nju.edu.gtms.service.ThesisService;
@@ -101,5 +102,10 @@ public class RegistrarController {
             reviewService.assignReview(thesis,internalId,externalId,deadline);
         }
         return Result.success();
+    }
+
+    @PostMapping("/generateEvaluation")
+    public Result generateEvaluation(@RequestParam String thesisId, @RequestParam String studentId){
+        return Result.success(registrarService.generateEvaluation(thesisId, studentId));
     }
 }

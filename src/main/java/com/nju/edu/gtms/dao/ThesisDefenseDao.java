@@ -5,6 +5,7 @@ import com.nju.edu.gtms.model.po.ThesisPO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -19,4 +20,8 @@ public interface ThesisDefenseDao {
     void saveInformation(ThesisDefensePO thesisDefensePO);
 
     List<ThesisDefensePO> findThesisByTeacherId(String teacherId);
+
+    Date findLatestDefenseTimeByThesisId(String thesisId);
+
+    String findReviewByThesisId(String thesisId);
 }
