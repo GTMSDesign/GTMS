@@ -9,5 +9,6 @@ public interface StudentService {
     StudentPO getStudentById(String studentId);
     String getStudentNameById(String studentId);
     void finishDraft(String thesisId);
+    void addNewThesis(String studentId, String title);
 
 }

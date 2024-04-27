@@ -154,6 +154,9 @@ public class FileTransferServiceImpl implements FileTransferService {
 //            return ResponseEntity.ok()
 //                    .headers(headers)
 //                    .body(data);
+            if (filePath == null){
+                return "Error";
+            }
             if (filePath.length() == 0){
                 return "Error";
             }

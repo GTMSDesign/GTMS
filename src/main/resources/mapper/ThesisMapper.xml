@@ -53,6 +53,11 @@
         VALUES (#{thesisId}, #{repetition}, #{conclusion},#{date})
     </insert>
 
+    <insert id="addNewThesis" parameterType="com.nju.edu.gtms.model.po.ThesisPO">
+        INSERT INTO thesis ( thesis_id, student_id, student_name, teacher_id, teacher_name, title, comment, opinion, opinion_url, status, thesis_url, defense_times, proposal_url)
+        VALUES (#{thesisId}, #{studentId}, #{studentName}, #{teacherId}, #{teacherName}, #{title}, #{comment}, #{opinion}, #{opinionUrl}, #{status}, #{thesisUrl}, #{defenseTimes}, #{proposalUrl})
+    </insert>
+
     <!-- 结果映射配置 -->
     <resultMap id="ThesisPO" type="com.nju.edu.gtms.model.po.ThesisPO">
         <id column="thesis_id" property="thesisId" />

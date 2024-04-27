@@ -32,4 +32,6 @@ public interface ThesisDao {
     String fileDownload(String id, String type);
 
     void addPlagiarismCheck(PlagiarismCheckPO po);
+
+    void addNewThesis(ThesisPO thesisPO);
 }

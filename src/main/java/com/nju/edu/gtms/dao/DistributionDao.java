@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface DistributionDao {
     String[] getStudentIdByTeacherId(String teacherId);
     String[] getTeacherIdByStudentId(String studentId);
-
     void submitAssignment(String studentId, String teacherId);
-
     void deleteAssignment(String studentId, String teacherId);
 }

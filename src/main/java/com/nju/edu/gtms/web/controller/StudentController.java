@@ -35,4 +35,10 @@ public class StudentController {
         studentService.finishDraft(thesisId);
         return Result.success();
     }
+
+    @GetMapping("/addNewThesis")
+    public Result addNewThesis(@RequestParam("studentId") String studentId, @RequestParam("title") String title){
+        studentService.addNewThesis(studentId, title);
+        return Result.success();
+    }
 }

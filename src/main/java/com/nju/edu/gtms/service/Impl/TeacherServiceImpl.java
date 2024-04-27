@@ -28,7 +28,7 @@ public class TeacherServiceImpl implements TeacherService {
     public void reviewProposal(String thesisId, String result) {
         //先根据thesis查到对应PO
         ThesisPO thesisPO = thesisDao.findOneByThesisId(thesisId);
-        if(thesisPO==null||!thesisPO.getStatus().equals("待开题")){
+        if(thesisPO==null||!thesisPO.getStatus().equals("未开题")){
             return;
         }
         //看result，通过则修改状态，不通过则删除记录
