@@ -35,4 +35,6 @@ public interface RegistrarService {
     void deleteAssignment(String studentId, String teacherId);
 
     String generateEvaluation(String thesisId, String studentId);
+
+    void assignDefense(String thesis, String secretaryId, String teacherId1, String teacherId2, String teacherId3, String place, Date deadline);
 }

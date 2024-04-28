@@ -211,4 +211,9 @@ public class RegistrarServiceImpl implements RegistrarService {
             writeModels.add(writeModel);
             return writeModels;
     }
+
+    @Override
+    public void assignDefense(String thesis, String secretaryId, String teacherId1, String teacherId2, String teacherId3, String place, Date deadline) {
+
+    }
 }

@@ -97,7 +97,10 @@ public class RegistrarController {
     }
 
     @PostMapping("/assignReview")
-    public Result assignReview(@RequestParam String[] thesisId,@RequestParam String internalId,@RequestParam String externalId,@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline){
+    public Result assignReview(@RequestParam String[] thesisId,
+                               @RequestParam String internalId,
+                               @RequestParam String externalId,
+                               @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline){
         for(String thesis:thesisId){
             reviewService.assignReview(thesis,internalId,externalId,deadline);
         }
@@ -107,5 +110,19 @@ public class RegistrarController {
     @PostMapping("/generateEvaluation")
     public Result generateEvaluation(@RequestParam String thesisId, @RequestParam String studentId){
         return Result.success(registrarService.generateEvaluation(thesisId, studentId));
+    }
+
+    @PostMapping("/assignDefense")
+    public Result assignDefense(@RequestParam String[] thesisId,
+                                @RequestParam String secretaryId,
+                                @RequestParam String teacherId1,
+                                @RequestParam String teacherId2,
+                                @RequestParam String teacherId3,
+                                @RequestParam String place,
+                                @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline){
+        for(String thesis:thesisId){
+            registrarService.assignDefense(thesis, secretaryId, teacherId1, teacherId2, teacherId3, place, deadline);
+        }
+        return Result.success();
     }
 }
