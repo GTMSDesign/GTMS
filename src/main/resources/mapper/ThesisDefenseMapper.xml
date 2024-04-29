@@ -66,7 +66,6 @@
 <!--        #{resolutionUrl}, #{place}, #{date}, #{review}-->
 <!--        )-->
 <!--    </insert>-->
-=======
     <delete id="deleteDefense">
         delete from thesis_defense where defense_id=#{defenseId}
     </delete>
@@ -77,9 +76,6 @@
     <update id="changeStatueToFinishDraft">
         update thesis set status="完成初稿" where thesis_id =#{thesisId}
     </update>
-
-
->>>>>>> Stashed changes
     <!-- 结果映射配置 -->
     <resultMap id="ThesisDefensePO" type="com.nju.edu.gtms.model.po.ThesisDefensePO">
         <id column="defense_id" property="defenseId" />
