@@ -19,11 +19,17 @@ public interface ThesisDefenseDao {
 
     void saveInformation(ThesisDefensePO thesisDefensePO);
 
-    List<ThesisDefensePO> findThesisByTeacherId(String teacherId);
+    List<ThesisDefensePO> findDefenseThesisByTeacherId(String teacherId);
+    List<ThesisDefensePO> findDefenseThesisByTeacher1Id(String teacherId);
+    ThesisDefensePO findDefenseByDefenseId(String defenseId);
 
     Date findLatestDefenseTimeByThesisId(String thesisId);
 
     String findReviewByThesisId(String thesisId);
 
     void assignDefense(String thesis, String secretaryId, String teacherId1, String teacherId2, String teacherId3, String place, Date deadline);
+    void deleteDefense(String defenseId);
+
+    void changeStatueToFinishDefense(int thesisId);
+    void changeStatueToFinishDraft(int thesisId);
 }

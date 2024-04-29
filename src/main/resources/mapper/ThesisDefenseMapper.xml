@@ -23,26 +23,24 @@
     <update id = "saveInformation" parameterType="com.nju.edu.gtms.model.po.ThesisDefensePO">
         update thesis_defense
         <set>
-            <if test="thesisId != 0"> `thesis_id`  = #{thesisId},</if>
-            <if test="secretary != null"> `secretary`  = #{secretary},</if>
-            <if test="teacher1 != null"> `teacher_1`  = #{teacher1},</if>
-            <if test="teacher2 != null"> `teacher_2`  = #{teacher2},</if>
-            <if test="teacher3 != null"> `teacher_3`  = #{teacher3},</if>
             <if test="conclusion != null"> `conclusion`  = #{conclusion},</if>
             <if test="resolution != null"> `resolution`  = #{resolution},</if>
             <if test="defenseRemarks != null"> `defense_remarks`  = #{defenseRemarks},</if>
-            <if test="defenseUrl != null"> `defense_url`  = #{defenseUrl},</if>
-            <if test="resolutionUrl != null"> `resolution_url`  = #{resolutionUrl},</if>
-            <if test="thesisId != null"> `thesis_id`  = #{thesisId},</if>
-            <if test="place != null"> `place`  = #{place},</if>
             <if test="review != null"> `review`  = #{review},</if>
-            <if test="secretary != null"> `secretary`  = #{secretary},</if>
         </set>
-        where defense_id  = #{defenseId}
+        where thesis_id  = #{thesisId}
     </update>
 
-    <select id="findThesisByTeacherId" resultMap="ThesisDefensePO">
+    <select id="findDefenseThesisByTeacherId" resultMap="ThesisDefensePO">
         select * from thesis_defense where secretary=#{teacherId}
+    </select>
+
+    <select id="findDefenseThesisByTeacher1Id" resultMap="ThesisDefensePO">
+        select * from thesis_defense where teacher_1=#{teacherId}
+    </select>
+
+    <select id="findDefenseByDefenseId" resultMap="ThesisDefensePO">
+        select * from thesis_defense where defense_id=#{defenseId}
     </select>
 
     <select id="findLatestDefenseTimeByThesisId" resultType="Date">
@@ -68,6 +66,20 @@
 <!--        #{resolutionUrl}, #{place}, #{date}, #{review}-->
 <!--        )-->
 <!--    </insert>-->
+=======
+    <delete id="deleteDefense">
+        delete from thesis_defense where defense_id=#{defenseId}
+    </delete>
+    <update id="changeStatueToFinishDefense">
+        update thesis set status="完成答辩" where thesis_id =#{thesisId}
+    </update>
+
+    <update id="changeStatueToFinishDraft">
+        update thesis set status="完成初稿" where thesis_id =#{thesisId}
+    </update>
+
+
+>>>>>>> Stashed changes
     <!-- 结果映射配置 -->
     <resultMap id="ThesisDefensePO" type="com.nju.edu.gtms.model.po.ThesisDefensePO">
         <id column="defense_id" property="defenseId" />
