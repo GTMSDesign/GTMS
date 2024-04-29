@@ -24,4 +24,6 @@ public interface ThesisDefenseDao {
     Date findLatestDefenseTimeByThesisId(String thesisId);
 
     String findReviewByThesisId(String thesisId);
+
+    void assignDefense(String thesis, String secretaryId, String teacherId1, String teacherId2, String teacherId3, String place, Date deadline);
 }

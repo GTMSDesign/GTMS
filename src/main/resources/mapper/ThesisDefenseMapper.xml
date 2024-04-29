@@ -53,6 +53,10 @@
         select review from thesis_defense where thesis_id=#{thesisId} ORDER BY date DESC LIMIT 1
     </select>
 
+    <insert id="assignDefense">
+        insert into thesis_defense value(null,#{thesis},#{secretaryId},#{teacherId1},#{teacherId2},#{teacherId3},null,null,null,null,null,#{place},#{deadline},null)
+    </insert>
+
 <!--    <insert id = "saveInformation" parameterType="thesisDefensePO">-->
 <!--        insert into thesis_defense-->
 <!--        (`defense_id`,`thesis_id`, `secretary`, `teacher_1`, `teacher_2`, `teacher_3`,-->

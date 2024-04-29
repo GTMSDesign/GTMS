@@ -13,11 +13,17 @@ import com.nju.edu.gtms.util.WriteModel;
 import org.burningwave.core.assembler.StaticComponentContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class RegistrarServiceImpl implements RegistrarService {
@@ -214,6 +220,40 @@ public class RegistrarServiceImpl implements RegistrarService {
 
     @Override
     public void assignDefense(String thesis, String secretaryId, String teacherId1, String teacherId2, String teacherId3, String place, Date deadline) {
+        thesisDefenseDao.assignDefense(thesis,secretaryId,teacherId1,teacherId2,teacherId3,place,deadline);
+        thesisDao.setThesisStatue("答辩中",thesis);
 
+        ThesisPO thesisPO = thesisDao.findOneByThesisId(thesis);
+        TeacherPO teacherPO = teacherDao.findOneById(secretaryId);
+        String subject = "答辩：" + thesisPO.getStudentName() + "_" + thesisPO.getTitle();
+        String body1 = "尊敬的"+ teacherPO.getTeacherName()+"请您参加该同学的论文答辩，答辩时间为"+deadline+"，地点为"+place+"评审链接为http://localhost:5173。";
+        teacherPO = teacherDao.findOneById(teacherId1);
+        String body2 = "尊敬的"+ teacherPO.getTeacherName()+"请您参加该同学的论文答辩，答辩时间为"+deadline+"，地点为"+place+"评审链接为http://localhost:5173。";
+        teacherPO = teacherDao.findOneById(teacherId2);
+        String body3 = "尊敬的"+ teacherPO.getTeacherName()+"请您参加该同学的论文答辩，答辩时间为"+deadline+"，地点为"+place+"评审链接为http://localhost:5173。";
+        teacherPO = teacherDao.findOneById(teacherId3);
+        String body4 = "尊敬的"+ teacherPO.getTeacherName()+"请您参加该同学的论文答辩，答辩时间为"+deadline+"，地点为"+place+"评审链接为http://localhost:5173。";
+
+
+        try {
+            System.out.println(convert(thesisPO.getThesisUrl(),thesisPO.getTitle()));
+            emailService.sendAttachmentMail(secretaryId,subject,body1,convert(thesisPO.getThesisUrl(),thesisPO.getTitle()));
+            emailService.sendAttachmentMail(teacherId1,subject,body2,convert(thesisPO.getThesisUrl(),thesisPO.getTitle()));
+            emailService.sendAttachmentMail(teacherId2,subject,body3,convert(thesisPO.getThesisUrl(),thesisPO.getTitle()));
+            emailService.sendAttachmentMail(teacherId3,subject,body4,convert(thesisPO.getThesisUrl(),thesisPO.getTitle()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+
+    public static MultipartFile convert(String fileUrl,String fileName) throws IOException {
+        URL url = new URL(fileUrl);
+        URLConnection connection = url.openConnection();
+        String contentType = connection.getContentType();
+        try (InputStream inputStream = connection.getInputStream()) {
+            byte[] bytes = inputStream.readAllBytes();
+            return new MockMultipartFile(fileName, fileName, contentType, bytes);
+        }
+    }
+
 }
