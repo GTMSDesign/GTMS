@@ -39,6 +39,14 @@
         select * from thesis_defense where teacher_1=#{teacherId}
     </select>
 
+    <select id="findDefenseThesisByTeacher2Id" resultMap="ThesisDefensePO">
+        select * from thesis_defense where teacher_2=#{teacherId}
+    </select>
+
+    <select id="findDefenseThesisByTeacher3Id" resultMap="ThesisDefensePO">
+        select * from thesis_defense where teacher_3=#{teacherId}
+    </select>
+
     <select id="findDefenseByDefenseId" resultMap="ThesisDefensePO">
         select * from thesis_defense where defense_id=#{defenseId}
     </select>
@@ -55,21 +63,10 @@
         insert into thesis_defense value(null,#{thesis},#{secretaryId},#{teacherId1},#{teacherId2},#{teacherId3},null,null,null,null,null,#{place},#{deadline},null)
     </insert>
 
-<!--    <insert id = "saveInformation" parameterType="thesisDefensePO">-->
-<!--        insert into thesis_defense-->
-<!--        (`defense_id`,`thesis_id`, `secretary`, `teacher_1`, `teacher_2`, `teacher_3`,-->
-<!--        `conclusion`, `resolution`, `defense_remarks`, `defense_url`,-->
-<!--        `resolution_url`, `place`, `date`, `review`-->
-<!--        ) values (-->
-<!--        #{defenseId}, #{thesisId}, #{secretary}, #{teacher1}, #{teacher2}, #{teacher3},-->
-<!--        #{conclusion}, #{resolution}, #{defenseRemarks}, #{defenseUrl},-->
-<!--        #{resolutionUrl}, #{place}, #{date}, #{review}-->
-<!--        )-->
-<!--    </insert>-->
-=======
     <delete id="deleteDefense">
         delete from thesis_defense where defense_id=#{defenseId}
     </delete>
+
     <update id="changeStatueToFinishDefense">
         update thesis set status="完成答辩" where thesis_id =#{thesisId}
     </update>
@@ -78,8 +75,6 @@
         update thesis set status="完成初稿" where thesis_id =#{thesisId}
     </update>
 
-
->>>>>>> Stashed changes
     <!-- 结果映射配置 -->
     <resultMap id="ThesisDefensePO" type="com.nju.edu.gtms.model.po.ThesisDefensePO">
         <id column="defense_id" property="defenseId" />

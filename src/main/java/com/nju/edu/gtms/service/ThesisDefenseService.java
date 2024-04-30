@@ -12,10 +12,14 @@ public interface ThesisDefenseService {
 
     List<ThesisDefensePO> getDefenseThesisByTeacher1Id(String teacherId);
 
+    List<ThesisDefensePO> getAllDefenseThesisByTeachersId(String teacherId);
+
     ThesisDefensePO getDefenseByDefenseId(String defenseId);
 
     DefensedThesisVO getDefensedThesis(String defenseId);
     void saveInformation(ThesisDefenseVO thesisDefenseVO);
+
+    void saveDeferredInformation(ThesisDefenseVO thesisDefenseVO);
 
     ThesisDefensePO findDefenseByThesisId(String thesisId);
 

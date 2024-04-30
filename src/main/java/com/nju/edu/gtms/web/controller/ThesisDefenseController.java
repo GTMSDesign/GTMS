@@ -33,6 +33,12 @@ public class ThesisDefenseController {
         return Result.success(thesisDefenseService.getDefenseThesisByTeacher1Id(teacherId));
     }
 
+    @GetMapping("/getAllThesisByTeachersId")
+    public Result getAllThesisByTeachersId(@RequestParam("account") String teacherId){
+        System.out.println(thesisDefenseService.getAllDefenseThesisByTeachersId(teacherId));
+        return Result.success(thesisDefenseService.getAllDefenseThesisByTeachersId(teacherId));
+    }
+
     @GetMapping("/getDefensedThesis")
     public Result getDefensedThesis(@RequestParam("defenseId") String defenseId){
 //        System.out.println(thesisDefenseService.getDefenseThesisByTeacher1Id(teacherId));
@@ -54,6 +60,12 @@ public class ThesisDefenseController {
     public Result submitDefense(String defenseId){
         thesisDefenseService.formalSubmission(defenseId);
         System.out.println("getSubmission");
+        return Result.success();
+    }
+
+    @PostMapping("/deferredDefense")
+    public Result saveDeferInformation(ThesisDefenseVO thesisDefenseVO){
+        thesisDefenseService.saveDeferredInformation(thesisDefenseVO);
         return Result.success();
     }
 

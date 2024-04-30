@@ -21,6 +21,8 @@ public interface ThesisDefenseDao {
 
     List<ThesisDefensePO> findDefenseThesisByTeacherId(String teacherId);
     List<ThesisDefensePO> findDefenseThesisByTeacher1Id(String teacherId);
+    List<ThesisDefensePO> findDefenseThesisByTeacher2Id(String teacherId);
+    List<ThesisDefensePO> findDefenseThesisByTeacher3Id(String teacherId);
     ThesisDefensePO findDefenseByDefenseId(String defenseId);
 
     Date findLatestDefenseTimeByThesisId(String thesisId);
