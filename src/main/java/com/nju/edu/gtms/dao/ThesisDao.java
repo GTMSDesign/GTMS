@@ -34,4 +34,6 @@ public interface ThesisDao {
     void addPlagiarismCheck(PlagiarismCheckPO po);
 
     void addNewThesis(ThesisPO thesisPO);
+
+    void addDefense(int time, String thesisId);
 }

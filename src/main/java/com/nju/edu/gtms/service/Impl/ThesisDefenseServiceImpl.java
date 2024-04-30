@@ -68,8 +68,11 @@ public class ThesisDefenseServiceImpl implements ThesisDefenseService {
             System.out.println("todelete");
             thesisDefenseDao.deleteDefense(defenseId);
             thesisDefenseDao.changeStatueToFinishDraft(thesisId);
+            int defenseTime = thesisPO.getDefenseTimes();
+            defenseTime += 1;
+            thesisDao.addDefense(defenseTime, String.valueOf(thesisId));
+
         }
-        // todo:暂缓通过论文此处是否需要更改状态
         else {
             String subject = "论文答辩结果通知";
             String body = String.format("尊敬的%s老师和%s同学，你们的论文答辩结果为暂缓通过， 请在规定的时间内完成相应的修改。",
@@ -100,11 +103,17 @@ public class ThesisDefenseServiceImpl implements ThesisDefenseService {
     @Override
     public List<ThesisDefensePO> getAllDefenseThesisByTeachersId(String teacherId) {
         List<ThesisDefensePO> allDefenseThesisByTeachersId = new ArrayList<>();
+        List<ThesisDefensePO> allDeferredDefense = new ArrayList<>();
         allDefenseThesisByTeachersId.addAll(thesisDefenseDao.findDefenseThesisByTeacherId(teacherId));
         allDefenseThesisByTeachersId.addAll(thesisDefenseDao.findDefenseThesisByTeacher1Id(teacherId));
         allDefenseThesisByTeachersId.addAll(thesisDefenseDao.findDefenseThesisByTeacher2Id(teacherId));
         allDefenseThesisByTeachersId.addAll(thesisDefenseDao.findDefenseThesisByTeacher3Id(teacherId));
-        return allDefenseThesisByTeachersId;
+        for(ThesisDefensePO thesisDefensePO: allDefenseThesisByTeachersId){
+            if (thesisDefensePO.getConclusion().equals("delay")){
+                allDeferredDefense.add(thesisDefensePO);
+            }
+        }
+        return allDeferredDefense;
     }
 
     @Override
@@ -164,17 +173,26 @@ public class ThesisDefenseServiceImpl implements ThesisDefenseService {
 
         String defenseId = String.valueOf(thesisDefensePO.getDefenseId());
 
+        ThesisPO thesisPO = thesisDao.findOneByThesisId(String.valueOf(thesisId));
+
         System.out.println(thesisDefenseVO.getState());
         if (thesisDefenseVO.getState().equals("pass")){
+            if(thesisDefensePO.getConclusion().equals("defer")){
+                thesisDefensePO.setConclusion("");
+            }
             thesisDefenseVO.setState(thesisDefenseVO.getState() + thesisDefensePO.getConclusion());
             saveInformation(thesisDefenseVO);
             if (thesisDefenseVO.getState().equals("passpasspass")){
                 thesisDefenseDao.deleteDefense(defenseId);
                 thesisDefenseDao.changeStatueToFinishDefense(Integer.parseInt(thesisId));
+                int defenseTime = thesisPO.getDefenseTimes();
+                defenseTime += 1;
+                thesisDao.addDefense(defenseTime,thesisId);
             }
         } else{
             thesisDefenseDao.deleteDefense(defenseId);
             thesisDefenseDao.changeStatueToFinishDraft(Integer.parseInt(thesisId));
+
         }
 
 

@@ -58,6 +58,10 @@
         VALUES (#{thesisId}, #{studentId}, #{studentName}, #{teacherId}, #{teacherName}, #{title}, #{comment}, #{opinion}, #{opinionUrl}, #{status}, #{thesisUrl}, #{defenseTimes}, #{proposalUrl})
     </insert>
 
+    <update id="addDefense" timeout="10">
+        update thesis set defense_times = #{time} where thesis_id=#{thesisId}
+    </update>
+
     <!-- 结果映射配置 -->
     <resultMap id="ThesisPO" type="com.nju.edu.gtms.model.po.ThesisPO">
         <id column="thesis_id" property="thesisId" />
