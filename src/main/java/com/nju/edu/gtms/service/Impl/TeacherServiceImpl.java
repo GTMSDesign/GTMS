@@ -93,4 +93,14 @@ public class TeacherServiceImpl implements TeacherService {
         teacherDao.finishDelete(thesisId);
     }
 
+    @Override
+    public void finishBeforeDefense(String thesisId) {
+        thesisDao.setThesisStatue("答辩前定稿", thesisId);
+    }
+
+    @Override
+    public void finishAfterDefense(String thesisId) {
+        thesisDao.setThesisStatue("答辩后定稿", thesisId);
+    }
+
 }

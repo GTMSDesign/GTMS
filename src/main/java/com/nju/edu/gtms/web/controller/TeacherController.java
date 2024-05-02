@@ -76,4 +76,16 @@ public class TeacherController {
         teacherService.finishDelete(thesisId);
         return Result.success();
     }
+
+    @GetMapping("/finishBeforeDefense")
+    public Result finishBeforeDefense(@RequestParam("thesisId") String thesisId){
+        teacherService.finishBeforeDefense(thesisId);
+        return Result.success();
+    }
+
+    @GetMapping("/finishAfterDefense")
+    public Result finishAfterDefense(@RequestParam("thesisId") String thesisId){
+        teacherService.finishAfterDefense(thesisId);
+        return Result.success();
+    }
 }

@@ -25,4 +25,8 @@ public interface TeacherService {
     String getTeacherNameById(String teacherId);
 
     void finishDelete(String thesisId);
+
+    void finishBeforeDefense(String thesisId);
+
+    void finishAfterDefense(String thesisId);
 }
