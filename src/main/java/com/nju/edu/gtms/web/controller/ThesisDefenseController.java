@@ -17,7 +17,8 @@ public class ThesisDefenseController {
     }
 
     @PostMapping("/preliminaryResolution")
-    public Result saveInformation( ThesisDefenseVO thesisDefenseVO){
+    public Result saveInformation(ThesisDefenseVO thesisDefenseVO){
+        System.out.println(thesisDefenseVO);
         thesisDefenseService.saveInformation(thesisDefenseVO);
         return Result.success();
     }
@@ -65,6 +66,7 @@ public class ThesisDefenseController {
 
     @PostMapping("/deferredDefense")
     public Result saveDeferInformation(ThesisDefenseVO thesisDefenseVO){
+        System.out.println(thesisDefenseVO);
         thesisDefenseService.saveDeferredInformation(thesisDefenseVO);
         return Result.success();
     }

@@ -28,7 +28,7 @@
             <if test="defenseRemarks != null"> `defense_remarks`  = #{defenseRemarks},</if>
             <if test="review != null"> `review`  = #{review},</if>
         </set>
-        where thesis_id  = #{thesisId}
+        where defense_id  = #{defenseId}
     </update>
 
     <select id="findDefenseThesisByTeacherId" resultMap="ThesisDefensePO">
@@ -68,7 +68,7 @@
     </delete>
 
     <update id="changeStatueToFinishDefense">
-        update thesis set status="完成答辩" where thesis_id =#{thesisId}
+        update thesis set status="通过答辩" where thesis_id =#{thesisId}
     </update>
 
     <update id="changeStatueToFinishDraft">

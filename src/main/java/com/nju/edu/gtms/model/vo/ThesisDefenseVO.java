@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ThesisDefenseVO {
 
-    private String thesisId;
+    private String defenseId;
 
     private String state;  // 答辩当前状态/结论（通过、暂缓通过、不通过）
 

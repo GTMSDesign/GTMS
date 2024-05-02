@@ -35,7 +35,7 @@ public class ThesisDefenseServiceImpl implements ThesisDefenseService {
 
         ThesisDefensePO thesisDefensePO = new ThesisDefensePO() ;
 
-        thesisDefensePO.setThesisId(Integer.parseInt(thesisDefenseVO.getThesisId()));
+        thesisDefensePO.setDefenseId(Integer.parseInt(thesisDefenseVO.getDefenseId()));
 
         thesisDefensePO.setConclusion(thesisDefenseVO.getState());
 
@@ -62,7 +62,7 @@ public class ThesisDefenseServiceImpl implements ThesisDefenseService {
         int thesisId = thesisDefensePO.getThesisId();
         ThesisPO thesisPO = thesisDao.findOneByThesisId(String.valueOf(thesisId));
         if(conclusion.equals("pass")){
-            thesisDefenseDao.deleteDefense(defenseId);
+            //thesisDefenseDao.deleteDefense(defenseId);
             thesisDefenseDao.changeStatueToFinishDefense(thesisId);
         } else if (conclusion.equals("fail") ) {
             System.out.println("todelete");
@@ -77,13 +77,10 @@ public class ThesisDefenseServiceImpl implements ThesisDefenseService {
             String subject = "论文答辩结果通知";
             String body = String.format("尊敬的%s老师和%s同学，你们的论文答辩结果为暂缓通过， 请在规定的时间内完成相应的修改。",
                     thesisPO.getTeacherName(), thesisPO.getStudentName());
-
             // 向学生发送邮件
             emailService.send(thesisPO.getStudentId(),subject,body);
-
             // 向教师发送邮件
             emailService.send(thesisPO.getTeacherId(), subject, body);
-
         }
 
 
@@ -91,13 +88,12 @@ public class ThesisDefenseServiceImpl implements ThesisDefenseService {
 
     @Override
     public List<ThesisDefensePO> getDefenseThesisByTeacherId(String teacherId){
-        System.out.println("thesisDefenseDao_find_success");
-        return thesisDefenseDao.findDefenseThesisByTeacherId(teacherId);
+        return chooseStates(thesisDefenseDao.findDefenseThesisByTeacherId(teacherId));
     }
 
     @Override
     public List<ThesisDefensePO> getDefenseThesisByTeacher1Id(String teacherId){
-        return thesisDefenseDao.findDefenseThesisByTeacher1Id(teacherId);
+        return chooseStates(thesisDefenseDao.findDefenseThesisByTeacher1Id(teacherId));
     }
 
     @Override
@@ -113,13 +109,13 @@ public class ThesisDefenseServiceImpl implements ThesisDefenseService {
                 allDeferredDefense.add(thesisDefensePO);
             }
         }
-        return allDeferredDefense;
+        return chooseStates(allDeferredDefense);
     }
 
     @Override
     public ThesisDefensePO getDefenseByDefenseId(String defenseId){
-        System.out.println("thesisDefenseDao_find_defensebydefenseid");
-        System.out.println(thesisDefenseDao.findDefenseByDefenseId(defenseId));
+//        System.out.println("thesisDefenseDao_find_defensebydefenseid");
+//        System.out.println(thesisDefenseDao.findDefenseByDefenseId(defenseId));
         return thesisDefenseDao.findDefenseByDefenseId(defenseId);
     }
 
@@ -158,8 +154,6 @@ public class ThesisDefenseServiceImpl implements ThesisDefenseService {
 
         defensedThesisVO.setDefenseUrl(thesisDefensePO.getDefenseUrl());
 
-        System.out.println(defensedThesisVO);
-
         return defensedThesisVO;
 
     }
@@ -167,34 +161,47 @@ public class ThesisDefenseServiceImpl implements ThesisDefenseService {
     @Override
     public void saveDeferredInformation(ThesisDefenseVO thesisDefenseVO){
 
-        String thesisId = thesisDefenseVO.getThesisId();
+        String defenseId = thesisDefenseVO.getDefenseId();
 
-        ThesisDefensePO thesisDefensePO = thesisDefenseDao.findDefenseByThesisId(thesisId);
+        ThesisDefensePO thesisDefensePO = thesisDefenseDao.findDefenseByDefenseId(defenseId);
 
-        String defenseId = String.valueOf(thesisDefensePO.getDefenseId());
+        String thesisId = String.valueOf(thesisDefensePO.getThesisId());
 
-        ThesisPO thesisPO = thesisDao.findOneByThesisId(String.valueOf(thesisId));
+        ThesisPO thesisPO = thesisDao.findOneByThesisId(thesisId);
 
         System.out.println(thesisDefenseVO.getState());
         if (thesisDefenseVO.getState().equals("pass")){
-            if(thesisDefensePO.getConclusion().equals("defer")){
+            System.out.println(thesisDefensePO.getConclusion());
+            if(thesisDefensePO.getConclusion().contains("delay")){
+//                System.out.println("delaydelay");
                 thesisDefensePO.setConclusion("");
             }
             thesisDefenseVO.setState(thesisDefenseVO.getState() + thesisDefensePO.getConclusion());
             saveInformation(thesisDefenseVO);
             if (thesisDefenseVO.getState().equals("passpasspass")){
-                thesisDefenseDao.deleteDefense(defenseId);
+//                thesisDefenseDao.deleteDefense(defenseId);
                 thesisDefenseDao.changeStatueToFinishDefense(Integer.parseInt(thesisId));
-                int defenseTime = thesisPO.getDefenseTimes();
-                defenseTime += 1;
-                thesisDao.addDefense(defenseTime,thesisId);
             }
         } else{
             thesisDefenseDao.deleteDefense(defenseId);
             thesisDefenseDao.changeStatueToFinishDraft(Integer.parseInt(thesisId));
+            int defenseTime = thesisPO.getDefenseTimes();
+            defenseTime += 1;
+            thesisDao.addDefense(defenseTime,thesisId);
 
         }
 
 
+    }
+
+    public List<ThesisDefensePO> chooseStates (List<ThesisDefensePO> thesisDefensePOs) {
+        List<ThesisDefensePO> thesisDefensePOS = new ArrayList<>();
+        for (ThesisDefensePO thesisDefensePO : thesisDefensePOs) {
+            ThesisPO thesisPO = thesisDao.findOneByThesisId(String.valueOf(thesisDefensePO.getThesisId()));
+            if (thesisPO.getStatus().equals("答辩中")) {
+                thesisDefensePOS.add(thesisDefensePO);
+            }
+        }
+        return thesisDefensePOS;
     }
 }
