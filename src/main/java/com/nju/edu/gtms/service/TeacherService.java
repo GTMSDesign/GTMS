@@ -23,4 +23,6 @@ public interface TeacherService {
 
     void defenseResolution(String thesisId);
     String getTeacherNameById(String teacherId);
+
+    void finishDelete(String thesisId);
 }

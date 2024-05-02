@@ -70,4 +70,10 @@ public class TeacherController {
     public Result getTeacherNameById(@RequestParam("teacherId") String teacherId){
         return Result.success(teacherService.getTeacherNameById(teacherId));
     }
+
+    @GetMapping("/finishDelete")
+    public Result finishDelete(@RequestParam("thesisId") String thesisId){
+        teacherService.finishDelete(thesisId);
+        return Result.success();
+    }
 }

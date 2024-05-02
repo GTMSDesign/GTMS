@@ -24,4 +24,6 @@ public interface TeacherDao {
 
     List<TeacherPO> getAllTeacher();
 
+    void finishDelete(String thesisId);
+
 }

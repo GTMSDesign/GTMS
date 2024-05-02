@@ -88,4 +88,9 @@ public class TeacherServiceImpl implements TeacherService {
         return teacherDao.getTeacherNameById(teacherId);
     }
 
+    @Override
+    public void finishDelete(String thesisId) {
+        teacherDao.finishDelete(thesisId);
+    }
+
 }

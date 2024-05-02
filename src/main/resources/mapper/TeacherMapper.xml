@@ -38,6 +38,10 @@
         select * from teachers
     </select>
 
+    <delete id="finishDelete" parameterType="string">
+        delete from thesis where thesis_id = #{thesisId}
+    </delete>
+
     <!-- 结果映射配置 -->
     <resultMap id="TeacherPO" type="com.nju.edu.gtms.model.po.TeacherPO">
         <id column="teacher_id" property="teacherId" />
